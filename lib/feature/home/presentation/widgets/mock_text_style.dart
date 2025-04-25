@@ -11,5 +11,7 @@ final List<TextStyleConfig> textStyleConfigs = [
   TextStyleConfig(name: 'کولاک', fontFamily: 'colak'),
   TextStyleConfig(name: 'دارک', fontFamily: 'dark'),
   TextStyleConfig(name: 'دانا', fontFamily: 'dana'),
+  TextStyleConfig(name: 'دستنویس', fontFamily: 'dastnevis'),
+
   // Add more styles as needed
 ];

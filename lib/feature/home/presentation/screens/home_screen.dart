@@ -15,8 +15,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextStyle selectedStyle = const TextStyle(fontSize: 24);
-  String text = 'متن خود را وارد کنید';
-  double valueFontSize = 12;
+  String text = 'اینجا بنویس...';
+  double valueFontSize = 18;
   bool isSelected = true;
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: StyledTextInput(
+                    initialText: text,
                     textStyle: selectedStyle.copyWith(
                       fontSize: valueFontSize,
                     ),

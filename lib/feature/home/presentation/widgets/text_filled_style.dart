@@ -4,12 +4,13 @@ class StyledTextInput extends StatefulWidget {
   final TextStyle textStyle;
   final String initialText;
   final ValueChanged<String> onTextChanged;
-
+  final FocusNode? focusNode;
   const StyledTextInput({
     super.key,
     required this.textStyle,
     this.initialText = 'متن خود را وارد کنید',
     required this.onTextChanged,
+    this.focusNode,
   });
 
   @override
@@ -18,11 +19,30 @@ class StyledTextInput extends StatefulWidget {
 
 class _StyledTextInputState extends State<StyledTextInput> {
   late String _currentText;
+  late FocusNode _focusNode;
+  late TextEditingController _controller;
 
   @override
   void initState() {
     super.initState();
     _currentText = widget.initialText;
+    _focusNode = widget.focusNode ?? FocusNode();
+    _controller = TextEditingController(text: _currentText);
+
+    // Request focus when widget initializes
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _focusNode.requestFocus();
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    // Only dispose the focus node if we created it
+    if (widget.focusNode == null) {
+      _focusNode.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -31,6 +51,10 @@ class _StyledTextInputState extends State<StyledTextInput> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: TextField(
+          showCursor: true,
+          autofocus: true,
+          focusNode: _focusNode,
+          controller: _controller,
           textAlign: TextAlign.center,
           textDirection: TextDirection.rtl,
           style: widget.textStyle,
@@ -42,6 +66,7 @@ class _StyledTextInputState extends State<StyledTextInput> {
           },
           maxLines: null,
           decoration: InputDecoration(
+            isCollapsed: true,
             hintText: _currentText,
             hintStyle: widget.textStyle,
             border: InputBorder.none,
