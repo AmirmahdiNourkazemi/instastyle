@@ -8,5 +8,8 @@ final List<TextStyleConfig> textStyleConfigs = [
   TextStyleConfig(name: 'دریا', fontFamily: 'darya'),
   TextStyleConfig(name: 'دوران', fontFamily: 'doran'),
   TextStyleConfig(name: 'الماس', fontFamily: 'almas'),
+  TextStyleConfig(name: 'کولاک', fontFamily: 'colak'),
+  TextStyleConfig(name: 'دارک', fontFamily: 'dark'),
+  TextStyleConfig(name: 'دانا', fontFamily: 'dana'),
   // Add more styles as needed
 ];

@@ -122,6 +122,19 @@ flutter:
     - family: almas
       fonts:
         - asset: assets/fonts/fa_almas.ttf            
+
+    - family: dark
+      fonts:
+        - asset: assets/fonts/fa_dark.ttf   
+    - family: dastnevis
+      fonts:
+        - asset: assets/fonts/fa_dastnevis.ttf   
+    - family: colak
+      fonts:
+        - asset: assets/fonts/Colak.ttf    
+    - family: dana
+      fonts:
+        - asset: assets/fonts/Dana-Bold.ttf                           
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

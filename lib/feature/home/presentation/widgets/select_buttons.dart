@@ -39,11 +39,12 @@ class _SelectButtonsState extends State<SelectButtons> {
                     width: 100,
                     decoration: BoxDecoration(
                       color: selectedIndex == index
-                          ? Colors.blue.withOpacity(0.2)
+                          ? Theme.of(context).primaryColor.withOpacity(0.2)
                           : Colors.transparent,
                       border: Border.all(
-                        color:
-                            selectedIndex == index ? Colors.blue : Colors.grey,
+                        color: selectedIndex == index
+                            ? Theme.of(context).primaryColor
+                            : Colors.grey,
                         width: selectedIndex == index ? 2 : 1,
                       ),
                       borderRadius: BorderRadius.circular(10),
@@ -52,7 +53,7 @@ class _SelectButtonsState extends State<SelectButtons> {
                       child: Text(
                         textStyleConfigs[index].name,
                         style: textStyleConfigs[index].toTextStyle(),
-                        textDirection: TextDirection.rtl, // For Persian text
+                        textDirection: TextDirection.rtl,
                       ),
                     ),
                   ),
