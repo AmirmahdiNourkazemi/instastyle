@@ -9,7 +9,7 @@ String errorConvertor(int? statusCode, String? message) {
       case 401:
         return "شما دسترسی لازم را ندارید";
       case 404:
-        return "عکس مرتبط با غذا نیست";
+        return "متاسفانه صفحه مورد نظر یافت نشد";
        case 403:
         return "در خواست شما مجاز نیست لطفا با پشتیبانی ارتباط بگیرید";
       case 413:

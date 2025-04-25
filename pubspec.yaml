@@ -99,6 +99,29 @@ flutter:
           weight: 700
         - asset: assets/fonts/IRANYekanBoldFaNum.ttf
           weight: 800
+    - family: digikala
+      fonts:
+        - asset: assets/fonts/digikala.ttf      
+
+    - family: ahang
+      fonts:
+        - asset: assets/fonts/Ahang-Bold.ttf
+
+    - family: anjoman
+      fonts:
+        - asset: assets/fonts/Anjoman-Heavy.ttf
+    - family: aviny2
+      fonts:
+        - asset: assets/fonts/Aviny2.ttf         
+    - family: darya
+      fonts:
+        - asset: assets/fonts/Darya.ttf    
+    - family: doran
+      fonts:
+        - asset: assets/fonts/Doran.ttf   
+    - family: almas
+      fonts:
+        - asset: assets/fonts/fa_almas.ttf            
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

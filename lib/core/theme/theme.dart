@@ -114,41 +114,42 @@ class AppTheme {
   }
 
   static ThemeData theme(ColorScheme colorScheme) => ThemeData(
-        brightness: colorScheme.brightness,
-        
-        colorScheme: colorScheme,
-        iconTheme: IconThemeData(
-          color: colorScheme.inversePrimary,
-        ),
-        bottomSheetTheme: BottomSheetThemeData(
-          backgroundColor: colorScheme.onPrimary,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-          foregroundColor: WidgetStatePropertyAll<Color>(colorScheme.onPrimary),
-          textStyle: WidgetStatePropertyAll<TextStyle>(textTheme.bodyMedium!),
-          splashFactory: InkRipple.splashFactory,
-          shadowColor:
-              WidgetStatePropertyAll<Color>(colorScheme.inversePrimary),
-          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Dimensions.cornerRadiusSmall),
-          )),
-          backgroundColor: WidgetStateProperty.all(colorScheme.primary),
+      brightness: colorScheme.brightness,
+      colorScheme: colorScheme,
+      iconTheme: IconThemeData(
+        color: colorScheme.inversePrimary,
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: colorScheme.onPrimary,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll<Color>(colorScheme.onPrimary),
+        textStyle: WidgetStatePropertyAll<TextStyle>(textTheme.bodyMedium!),
+        splashFactory: InkRipple.splashFactory,
+        shadowColor: WidgetStatePropertyAll<Color>(colorScheme.inversePrimary),
+        shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Dimensions.cornerRadiusSmall),
         )),
-        buttonTheme: ButtonThemeData(
-          buttonColor: colorScheme.primary,
-          textTheme: ButtonTextTheme.primary,
-          colorScheme: colorScheme,
-        ),
-        appBarTheme: AppBarTheme(
-          backgroundColor: colorScheme.primary,
-          foregroundColor: colorScheme.onPrimary,
-        ),
-        textTheme: textTheme,
-        scaffoldBackgroundColor: colorScheme.surface,
-        canvasColor: colorScheme.surface,
-      );
+        backgroundColor: WidgetStateProperty.all(colorScheme.primary),
+      )),
+      buttonTheme: ButtonThemeData(
+        buttonColor: colorScheme.primary,
+        textTheme: ButtonTextTheme.primary,
+        colorScheme: colorScheme,
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
+      ),
+      textTheme: textTheme,
+      scaffoldBackgroundColor: colorScheme.surface,
+      canvasColor: colorScheme.surface,
+      dividerColor: colorScheme.onPrimary,
+      dividerTheme: DividerThemeData(
+        color: colorScheme.onPrimary,
+      ));
 
   List<ExtendedColor> get extendedColors => [];
 }

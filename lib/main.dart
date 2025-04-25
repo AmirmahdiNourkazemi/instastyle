@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instastyle/core/theme/theme.dart';
-import 'package:instastyle/feature/home/home_screen.dart';
+import 'package:instastyle/feature/home/presentation/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
