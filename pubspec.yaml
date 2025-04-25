@@ -30,7 +30,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  get_it: ^8.0.3
+  flutter_bloc: ^8.1.6
+  bloc: ^8.1.4
+  dio: ^5.7.0
+  shared_preferences: ^2.3.5
+  pinput: ^3.0.1
+  
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -74,17 +80,25 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: IRANYekan
+      fonts:
+        - asset: assets/fonts/IRANYekanLightFaNum.ttf
+          weight: 100
+        - asset: assets/fonts/IRANYekanLightFaNum.ttf
+          weight: 200
+        - asset: assets/fonts/IRANYekanRegularFaNum.ttf
+          weight: 300
+        - asset: assets/fonts/IRANYekanRegularFaNum.ttf
+          weight: 400
+        - asset: assets/fonts/IRANYekanMediumFaNum.ttf
+          weight: 500
+        - asset: assets/fonts/IRANYekanMediumFaNum.ttf
+          weight: 600
+        - asset: assets/fonts/IRANYekanBoldFaNum.ttf
+          weight: 700
+        - asset: assets/fonts/IRANYekanBoldFaNum.ttf
+          weight: 800
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
