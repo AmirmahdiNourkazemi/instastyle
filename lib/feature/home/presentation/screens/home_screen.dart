@@ -15,9 +15,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextStyle selectedStyle = const TextStyle(fontSize: 24);
+  Color selectColor =  Colors.black;
   String text = 'اینجا بنویس...';
   double valueFontSize = 18;
-  bool isSelected = true;
+  int isSelected = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,9 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: StyledTextInput(
-                    initialText: text,
+                   
                     textStyle: selectedStyle.copyWith(
                       fontSize: valueFontSize,
+                      color: selectColor,
                     ),
                     onTextChanged: (value) {
                       setState(() {
@@ -42,30 +44,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     }),
               ),
             ),
+            VerticalFontSlider(
+              initialSize: valueFontSize,
+              onSizeChanged: (value) {
+                setState(() {
+                  valueFontSize = value;
+                });
+              },
+            ),
             Positioned(
-              top: MediaQuery.of(context).size.height / 4,
-              child: VerticalFontSlider(
-                initialSize: valueFontSize,
-                onSizeChanged: (value) {
-                  setState(() {
-                    valueFontSize = value;
-                  });
-                },
-              ),
-            ),
-            Visibility(
-              visible: isSelected,
-              child: Positioned(
-                  bottom: 30,
-                  child: SelectButtons(
-                    onSelect: isSelected,
-                    onStyleSelected: (style) {
-                      setState(() {
-                        selectedStyle = style;
-                      });
-                    },
-                  )),
-            ),
+                bottom: 8,
+                child: SelectButtons(
+                  onSelect:isSelected ,
+                  onColorSelected: (value) {
+                    setState(() {
+                      selectColor = value;
+                    });
+                  },
+                  onStyleSelected: (style) {
+                    setState(() {
+                      selectedStyle = style;
+                    });
+                  },
+                )),
           ],
         ),
         persistentFooterAlignment: AlignmentDirectional.bottomCenter,

@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'InstaStyle',
       theme: AppTheme.light(),
-      darkTheme: AppTheme.dark(),
+      // darkTheme: AppTheme.dark(),
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(),
     );

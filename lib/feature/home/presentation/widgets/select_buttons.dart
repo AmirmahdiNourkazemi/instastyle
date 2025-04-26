@@ -1,66 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:instastyle/feature/home/presentation/widgets/fonts_list_view.dart';
 
+import 'color_list_view.dart';
 import 'mock_text_style.dart';
 
 class SelectButtons extends StatefulWidget {
-  final bool onSelect;
+  final int onSelect;
   final ValueChanged<TextStyle> onStyleSelected;
+  final ValueChanged<Color> onColorSelected;
   const SelectButtons(
-      {super.key, required this.onSelect, required this.onStyleSelected});
+      {super.key, required this.onSelect, required this.onStyleSelected , required this.onColorSelected});
 
   @override
   State<SelectButtons> createState() => _SelectButtonsState();
 }
 
 class _SelectButtonsState extends State<SelectButtons> {
-  int? selectedIndex;
+  
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(seconds: 1),
-      curve: Curves.easeInOutCirc,
-      height: widget.onSelect == true ? 70 : 0,
+    return SizedBox(
+      height: 70,
       width: MediaQuery.of(context).size.width,
-      child: widget.onSelect
-          ? ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: textStyleConfigs.length,
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                  widget.onStyleSelected(textStyleConfigs[index].toTextStyle());
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Container(
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: selectedIndex == index
-                          ? Theme.of(context).primaryColor.withOpacity(0.2)
-                          : Colors.transparent,
-                      border: Border.all(
-                        color: selectedIndex == index
-                            ? Theme.of(context).primaryColor
-                            : Colors.grey,
-                        width: selectedIndex == index ? 2 : 1,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        textStyleConfigs[index].name,
-                        style: textStyleConfigs[index].toTextStyle(),
-                        textDirection: TextDirection.rtl,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            )
+      child:  widget.onSelect == 1
+          ? FontsListView(
+            onStyleSelected: widget.onStyleSelected,
+          )
+          : widget.onSelect == 3 ?
+          ColorListView(
+            colorSelected: widget.onColorSelected,
+          )
           : null,
     );
   }
 }
+

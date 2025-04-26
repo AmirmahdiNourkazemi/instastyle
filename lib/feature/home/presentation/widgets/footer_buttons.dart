@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'select_buttons.dart';
 
 class FooterButtons extends StatefulWidget {
-  final ValueChanged<bool> onSelect;
+  final ValueChanged<int> onSelect;
   const FooterButtons({super.key, required this.onSelect});
 
   @override
@@ -11,12 +11,9 @@ class FooterButtons extends StatefulWidget {
 }
 
 class _FooterButtonsState extends State<FooterButtons> {
-  bool isSelected = true;
-  void toggleSelect() {
-    setState(() {
-      isSelected = !isSelected;
-    });
-    widget.onSelect(isSelected);
+  int? isSelected = 0;
+  void toggleSelect(int index) {
+    widget.onSelect(index);
   }
 
   @override
@@ -26,7 +23,7 @@ class _FooterButtonsState extends State<FooterButtons> {
       children: [
         TextButton(
           onPressed: () {
-            toggleSelect();
+            toggleSelect(1);
           },
           child: Text(
             'فونت',
@@ -35,7 +32,7 @@ class _FooterButtonsState extends State<FooterButtons> {
         ),
         TextButton(
           onPressed: () {
-            toggleSelect();
+            toggleSelect(2);
           },
           child: Text(
             'استایل',
@@ -44,7 +41,7 @@ class _FooterButtonsState extends State<FooterButtons> {
         ),
         TextButton(
           onPressed: () {
-            toggleSelect();
+            toggleSelect(3);
           },
           child: Text(
             'رنگ',
@@ -53,7 +50,7 @@ class _FooterButtonsState extends State<FooterButtons> {
         ),
         TextButton(
           onPressed: () {
-            toggleSelect();
+            toggleSelect(4);
           },
           child: Text(
             'انیمیشن',

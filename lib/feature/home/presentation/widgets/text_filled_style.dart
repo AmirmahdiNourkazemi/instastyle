@@ -8,7 +8,7 @@ class StyledTextInput extends StatefulWidget {
   const StyledTextInput({
     super.key,
     required this.textStyle,
-    this.initialText = 'متن خود را وارد کنید',
+    this.initialText = '...متنت رو بنویس',
     required this.onTextChanged,
     this.focusNode,
   });
@@ -27,7 +27,7 @@ class _StyledTextInputState extends State<StyledTextInput> {
     super.initState();
     _currentText = widget.initialText;
     _focusNode = widget.focusNode ?? FocusNode();
-    _controller = TextEditingController(text: _currentText);
+    _controller = TextEditingController();
 
     // Request focus when widget initializes
     WidgetsBinding.instance.addPostFrameCallback((_) {
