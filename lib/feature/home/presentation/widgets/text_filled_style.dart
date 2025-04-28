@@ -47,30 +47,28 @@ class _StyledTextInputState extends State<StyledTextInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: TextField(
-          showCursor: true,
-          autofocus: true,
-          focusNode: _focusNode,
-          controller: _controller,
-          textAlign: TextAlign.center,
-          textDirection: TextDirection.rtl,
-          style: widget.textStyle,
-          onChanged: (value) {
-            setState(() {
-              _currentText = value;
-            });
-            widget.onTextChanged(value);
-          },
-          maxLines: null,
-          decoration: InputDecoration(
-            isCollapsed: true,
-            hintText: _currentText,
-            hintStyle: widget.textStyle,
-            border: InputBorder.none,
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: TextField(
+        showCursor: true,
+        autofocus: true,
+        focusNode: _focusNode,
+        controller: _controller,
+        textAlign: TextAlign.center,
+        textDirection: TextDirection.rtl,
+        style: widget.textStyle,
+        onChanged: (value) {
+          setState(() {
+            _currentText = value;
+          });
+          widget.onTextChanged(value);
+        },
+        maxLines: null,
+        decoration: InputDecoration(
+          isCollapsed: true,
+          hintText: _currentText,
+          hintStyle: widget.textStyle,
+          border: InputBorder.none,
         ),
       ),
     );
