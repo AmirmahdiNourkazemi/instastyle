@@ -10,8 +10,9 @@ class FooterButtons extends StatefulWidget {
   State<FooterButtons> createState() => _FooterButtonsState();
 }
 
+int? isSelected = 0;
+
 class _FooterButtonsState extends State<FooterButtons> {
-  int? isSelected = 0;
   void toggleSelect(int index) {
     widget.onSelect(index);
   }

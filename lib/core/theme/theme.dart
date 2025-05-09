@@ -122,6 +122,7 @@ class AppTheme {
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: colorScheme.onPrimary,
       ),
+      
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
         foregroundColor: WidgetStatePropertyAll<Color>(colorScheme.onPrimary),
@@ -150,7 +151,7 @@ class AppTheme {
       dividerTheme: DividerThemeData(
         color: colorScheme.onPrimary,
       ));
-
+  
   List<ExtendedColor> get extendedColors => [];
 }
 
