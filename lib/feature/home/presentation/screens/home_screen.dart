@@ -61,16 +61,17 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-              top: 10,
-              right: 10,
-              child: ElevatedButton.icon(
-                iconAlignment: IconAlignment.end,
-                onPressed: () {
-                  export.captureAndCopy(_globalKey);
-                },
-                label: Text('کپی فونت'),
-                icon: const Icon(Icons.copy),
-              )),
+            top: 10,
+            right: 10,
+            child: ElevatedButton.icon(
+              iconAlignment: IconAlignment.end,
+              onPressed: () {
+                export.captureAndCopy(_globalKey);
+              },
+              label: const Text('کپی فونت'),
+              icon: const Icon(Icons.copy),
+            ),
+          ),
           VerticalFontSlider(
             initialSize: valueFontSize,
             onSizeChanged: (value) {

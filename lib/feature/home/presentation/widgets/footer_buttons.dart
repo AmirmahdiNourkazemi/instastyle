@@ -49,15 +49,6 @@ class _FooterButtonsState extends State<FooterButtons> {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
-        TextButton(
-          onPressed: () {
-            toggleSelect(4);
-          },
-          child: Text(
-            'انیمیشن',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-        ),
       ],
     );
   }
