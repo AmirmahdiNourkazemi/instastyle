@@ -29,34 +29,65 @@ class _FooterButtonsState extends State<FooterButtons> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        TextButton(
-          onPressed: () {
+        customTextButton(
+          isSelected: isSelected == 1,
+      context:context,
+          onTap: () {
             toggleSelect(1);
+            setState(() {
+              isSelected = 1;
+            });
           },
-          child: Text(
+          text: Text(
             'فونت',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
-        TextButton(
-          onPressed: () {
+         customTextButton(
+          isSelected: isSelected == 2,
+      context:context,
+          onTap: () {
             toggleSelect(2);
+            setState(() {
+              isSelected = 2;
+            });
           },
-          child: Text(
+          text: Text(
             'استایل',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
-        TextButton(
-          onPressed: () {
+        customTextButton(
+          isSelected: isSelected == 3,
+      context:context,
+          onTap: () {
             toggleSelect(3);
+            setState(() {
+              isSelected = 3;
+            });
           },
-          child: Text(
+          text: Text(
             'رنگ',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
+        
       ],
     );
   }
+}
+
+
+Widget customTextButton({required BuildContext context,required VoidCallback onTap ,required Text text ,required bool isSelected}) {
+
+  return TextButton(
+    style: TextButton.styleFrom(
+      backgroundColor: isSelected
+          ? Theme.of(context).colorScheme.primary
+          : Colors.transparent,
+    ),
+    onPressed: onTap,
+    child: text,
+  );
+ 
 }
