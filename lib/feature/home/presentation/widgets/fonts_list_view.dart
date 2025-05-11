@@ -35,12 +35,15 @@ class _FontsListViewState extends State<FontsListView> {
                               .colorScheme
                               .primary
                               .withOpacity(0.2)
-                          : Colors.transparent,
+                          : Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.1),
                       border: Border.all(
                         color: selectedIndex == index
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.inversePrimary,
-                        width: selectedIndex == index ? 2 : 1,
+                        width:2,
                       ),
                       borderRadius: BorderRadius.circular(10),
                     ),
