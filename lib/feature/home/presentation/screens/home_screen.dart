@@ -69,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ElevatedButton.icon(
               iconAlignment: IconAlignment.end,
               onPressed: () {
+                FocusScope.of(context).unfocus();
                 export.captureAndCopy(_globalKey);
               },
               label: const Text('کپی فونت'),
