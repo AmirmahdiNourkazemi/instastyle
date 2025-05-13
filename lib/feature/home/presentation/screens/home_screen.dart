@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:instastyle/core/widgets/app_bar.dart';
+import 'package:instastyle/feature/home/presentation/style/iphone_music.dart';
 import 'package:instastyle/feature/home/presentation/style/iphone_note.dart';
+import 'package:instastyle/feature/home/presentation/style/iphone_note_dark.dart';
 import 'package:instastyle/feature/home/presentation/widgets/export_class.dart';
 import 'package:instastyle/feature/home/presentation/widgets/select_buttons.dart';
 import 'package:instastyle/feature/home/presentation/widgets/text_filled_style.dart';
@@ -43,12 +45,12 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         alignment: Alignment.centerLeft,
         children: [
-          RepaintBoundary(
-            key: _globalKey,
-            child: Center(
+          Center(
+            child: RepaintBoundary(
+              key: _globalKey,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: IphoneNote(
+                child: IphoneNoteDark(
                   child: StyledTextInput(
                       textStyle: selectedStyle.copyWith(
                         fontSize: valueFontSize,
