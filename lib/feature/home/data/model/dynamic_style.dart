@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DynamicStyle {
   String? name;
-  Widget? widget;
+   Widget Function(Widget child)? builder;
 
-  DynamicStyle({this.name, this.widget});
+  DynamicStyle({this.name, this.builder});
 }

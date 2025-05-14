@@ -19,6 +19,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextStyle selectedStyle = const TextStyle(fontSize: 24);
+  Widget Function({required Widget child}) childStyle =
+      ({required Widget child}) => Container(child: child);
+
   Color selectColor = Colors.black;
   String text = 'اینجا بنویس...';
   double valueFontSize = 18;
@@ -50,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
               key: _globalKey,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: IphoneNoteDark(
+                child: childStyle(
                   child: StyledTextInput(
                       textStyle: selectedStyle.copyWith(
                         fontSize: valueFontSize,
@@ -62,6 +65,56 @@ class _HomeScreenState extends State<HomeScreen> {
                         });
                       }),
                 ),
+                // child: Stack(
+                //   alignment: Alignment.center,
+                //   children: [
+                //     if (text.isNotEmpty)
+                //       Opacity(
+                //         opacity: 1, // Adjust opacity as needed
+                //         child: childStyle(
+                //           // color: Colors.white,
+                //           child: ShaderMask(
+                //               blendMode: BlendMode.exclusion,
+                //               shaderCallback: (rect) =>
+                //                   const LinearGradient(colors: [
+                //                     Colors.purple,
+                //                     Colors.blue,
+                //                   ]).createShader(rect),
+                //               child: Text(
+                //                 text,
+                //                 textDirection: TextDirection.rtl,
+                //                 textAlign: TextAlign.center,
+                //                 style: TextStyle(
+                //                     fontSize: valueFontSize,
+                //                     color: Colors.transparent,
+                //                     decorationColor: Colors.amber,
+                //                     decoration: TextDecoration.underline,
+                //                     decorationThickness: 4,
+                //                     decorationStyle: TextDecorationStyle.solid,
+                //                     shadows: const [
+                //                       Shadow(
+                //                         color: Colors.white,
+                //                         offset: Offset(0, 0),
+                //                         blurRadius: 10.0,
+                //                       ),
+                //                     ]),
+                //               )),
+                //         ),
+                //       ),
+                //     childStyle(
+                //       child: StyledTextInput(
+                //           textStyle: selectedStyle.copyWith(
+                //             fontSize: valueFontSize,
+                //             color: selectColor,
+                //           ),
+                //           onTextChanged: (value) {
+                //             setState(() {
+                //               text = value;
+                //             });
+                //           }),
+                //     ),
+                //   ],
+                // ),
               ),
             ),
           ),
@@ -90,6 +143,11 @@ class _HomeScreenState extends State<HomeScreen> {
               bottom: 8,
               child: SelectButtons(
                 onSelect: isSelected,
+                onWidgetSelected: (styleWidget) {
+                  setState(() {
+                    childStyle = styleWidget;
+                  });
+                },
                 onColorSelected: (value) {
                   setState(() {
                     selectColor = value;
