@@ -15,7 +15,11 @@ class _StyleListViewState extends State<StyleListView> {
   List<String> image = [
     'assets/images/style_applemusic.png',
     'assets/images/light_iphone.png',
-    'assets/images/dark_iphone.png'
+    'assets/images/dark_iphone.png',
+    'assets/images/style_lightBox.jpg',
+    'assets/images/glow.png'
+
+
   ];
   @override
   void initState() {
