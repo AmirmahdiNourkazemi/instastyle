@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:instastyle/core/widgets/app_bar.dart';
-import 'package:instastyle/feature/home/presentation/style/iphone_music.dart';
-import 'package:instastyle/feature/home/presentation/style/iphone_note.dart';
-import 'package:instastyle/feature/home/presentation/style/iphone_note_dark.dart';
-import 'package:instastyle/feature/home/presentation/style/light_box.dart';
 import 'package:instastyle/feature/home/presentation/widgets/export_class.dart';
 import 'package:instastyle/feature/home/presentation/widgets/select_buttons.dart';
 import 'package:instastyle/feature/home/presentation/widgets/text_filled_style.dart';
 import 'package:instastyle/feature/home/presentation/widgets/vertical_font_slider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:photo_manager/photo_manager.dart';
 import '../widgets/footer_buttons.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,36 +18,50 @@ class _HomeScreenState extends State<HomeScreen> {
   TextStyle selectedStyle = const TextStyle(fontSize: 24);
   Widget Function({required Widget child}) childStyle =
       ({required Widget child}) => Container(child: child);
-
+  Widget Function(
+      {required Widget child,
+      required String text,
+      required double valueFontSize}) dynamicTextStyle = (
+          {required Widget child,
+          required String text,
+          required double valueFontSize}) =>
+      Container(child: child);
+  final TextEditingController _textController = TextEditingController();
   Color selectColor = Colors.black;
   String text = 'اینجا بنویس...';
   double valueFontSize = 18;
   int isSelected = 0;
   late Export export;
   final GlobalKey _globalKey = GlobalKey();
- Future<void> storagePermission() async {
-  try {
-    if (await Permission.photos.request().isGranted ||
-        await Permission.mediaLibrary.request().isGranted ||
-        await Permission.videos.request().isGranted ||
-        await Permission.audio.request().isGranted) {
-      print('Permission granted');
-    } else {
-      print('Permission denied');
+  Future<void> storagePermission() async {
+    try {
+      if (await Permission.photos.request().isGranted ||
+          await Permission.mediaLibrary.request().isGranted ||
+          await Permission.videos.request().isGranted ||
+          await Permission.audio.request().isGranted) {
+        print('Permission granted');
+      } else {
+        print('Permission denied');
+      }
+    } catch (e) {
+      print('Permission request failed: $e');
     }
-  } catch (e) {
-    print('Permission request failed: $e');
   }
-}
-
 
   @override
-
   void initState() {
     // TODO: implement initState
     super.initState();
     storagePermission();
     export = Export(context: context, text: text);
+    _textController.text = text;
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _textController.dispose();
   }
 
   @override
@@ -69,70 +78,36 @@ class _HomeScreenState extends State<HomeScreen> {
               child: RepaintBoundary(
                 key: _globalKey,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: childStyle(
-                    child: StyledTextInput(
-                        textStyle: selectedStyle.copyWith(
-                          fontSize: valueFontSize,
-                          color: selectColor,
-                        ),
-                        onTextChanged: (value) {
-                          setState(() {
-                            text = value;
-                          });
-                        }),
-                  ),
-                  // child: Stack(
-                  //   alignment: Alignment.center,
-                  //   children: [
-                  //     if (text.isNotEmpty)
-                  //       Opacity(
-                  //         opacity: 1, // Adjust opacity as needed
-                  //         child: childStyle(
-                  //           // color: Colors.white,
-                  //           child: ShaderMask(
-                  //               blendMode: BlendMode.exclusion,
-                  //               shaderCallback: (rect) =>
-                  //                   const LinearGradient(colors: [
-                  //                     Colors.purple,
-                  //                     Colors.blue,
-                  //                   ]).createShader(rect),
-                  //               child: Text(
-                  //                 text,
-                  //                 textDirection: TextDirection.rtl,
-                  //                 textAlign: TextAlign.center,
-                  //                 style: TextStyle(
-                  //                     fontSize: valueFontSize,
-                  //                     color: Colors.transparent,
-                  //                     decorationColor: Colors.amber,
-                  //                     decoration: TextDecoration.underline,
-                  //                     decorationThickness: 4,
-                  //                     decorationStyle: TextDecorationStyle.solid,
-                  //                     shadows: const [
-                  //                       Shadow(
-                  //                         color: Colors.white,
-                  //                         offset: Offset(0, 0),
-                  //                         blurRadius: 10.0,
-                  //                       ),
-                  //                     ]),
-                  //               )),
-                  //         ),
-                  //       ),
-                  //     childStyle(
-                  //       child: StyledTextInput(
-                  //           textStyle: selectedStyle.copyWith(
-                  //             fontSize: valueFontSize,
-                  //             color: selectColor,
-                  //           ),
-                  //           onTextChanged: (value) {
-                  //             setState(() {
-                  //               text = value;
-                  //             });
-                  //           }),
-                  //     ),
-                  //   ],
-                  // ),
-                ),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    // child: childStyle(
+                    //   child: StyledTextInput(
+                    //       textStyle: selectedStyle.copyWith(
+                    //         fontSize: valueFontSize,
+                    //         color: selectColor,
+                    //       ),
+                    //       onTextChanged: (value) {
+                    //         setState(() {
+                    //           text = value;
+                    //         });
+                    //       }),
+                    // ),
+                    child: childStyle(
+                      child: dynamicTextStyle(
+                        valueFontSize: valueFontSize,
+                        text: text,
+                        child: StyledTextInput(
+                            controller: _textController,
+                            textStyle: selectedStyle.copyWith(
+                              fontSize: valueFontSize,
+                              color: selectColor,
+                            ),
+                            onTextChanged: (value) {
+                              setState(() {
+                                text = value;
+                              });
+                            }),
+                      ),
+                    )),
               ),
             ),
             Positioned(
@@ -142,6 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 iconAlignment: IconAlignment.end,
                 onPressed: () {
                   FocusScope.of(context).unfocus();
+                  Future.delayed(const Duration(milliseconds: 500));
                   export.captureAndCopy(_globalKey);
                 },
                 label: const Text('کپی فونت'),
@@ -173,6 +149,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   onStyleSelected: (style) {
                     setState(() {
                       selectedStyle = style;
+                    });
+                  },
+                  onDynamicWidgetSelected: (value) {
+                    setState(() {
+                      dynamicTextStyle = value;
                     });
                   },
                 )),

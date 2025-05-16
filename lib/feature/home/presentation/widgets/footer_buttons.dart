@@ -4,7 +4,7 @@ import 'select_buttons.dart';
 
 class FooterButtons extends StatefulWidget {
   final ValueChanged<int> onSelect;
-  const FooterButtons({super.key, required this.onSelect });
+  const FooterButtons({super.key, required this.onSelect});
 
   @override
   State<FooterButtons> createState() => _FooterButtonsState();
@@ -16,6 +16,7 @@ class _FooterButtonsState extends State<FooterButtons> {
   void toggleSelect(int index) {
     widget.onSelect(index);
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -23,7 +24,8 @@ class _FooterButtonsState extends State<FooterButtons> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       widget.onSelect(1);
     });
-  } 
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -31,7 +33,7 @@ class _FooterButtonsState extends State<FooterButtons> {
       children: [
         customTextButton(
           isSelected: isSelected == 1,
-      context:context,
+          context: context,
           onTap: () {
             toggleSelect(1);
             setState(() {
@@ -43,13 +45,27 @@ class _FooterButtonsState extends State<FooterButtons> {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
-         customTextButton(
+        customTextButton(
           isSelected: isSelected == 2,
-      context:context,
+          context: context,
           onTap: () {
             toggleSelect(2);
             setState(() {
               isSelected = 2;
+            });
+          },
+          text: Text(
+            'رنگ',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
+        customTextButton(
+          isSelected: isSelected == 3,
+          context: context,
+          onTap: () {
+            toggleSelect(3);
+            setState(() {
+              isSelected = 3;
             });
           },
           text: Text(
@@ -58,28 +74,29 @@ class _FooterButtonsState extends State<FooterButtons> {
           ),
         ),
         customTextButton(
-          isSelected: isSelected == 3,
-      context:context,
+          isSelected: isSelected == 4,
+          context: context,
           onTap: () {
-            toggleSelect(3);
+            toggleSelect(4);
             setState(() {
-              isSelected = 3;
+              isSelected = 4;
             });
           },
           text: Text(
-            'رنگ',
+            'متن',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
-        
       ],
     );
   }
 }
 
-
-Widget customTextButton({required BuildContext context,required VoidCallback onTap ,required Text text ,required bool isSelected}) {
-
+Widget customTextButton(
+    {required BuildContext context,
+    required VoidCallback onTap,
+    required Text text,
+    required bool isSelected}) {
   return TextButton(
     style: TextButton.styleFrom(
       backgroundColor: isSelected
@@ -89,5 +106,4 @@ Widget customTextButton({required BuildContext context,required VoidCallback onT
     onPressed: onTap,
     child: text,
   );
- 
 }

@@ -5,12 +5,14 @@ class StyledTextInput extends StatefulWidget {
   final String initialText;
   final ValueChanged<String> onTextChanged;
   final FocusNode? focusNode;
+  final TextEditingController controller;
   const StyledTextInput({
     super.key,
     required this.textStyle,
     this.initialText = '...متنت رو بنویس',
     required this.onTextChanged,
     this.focusNode,
+    required this.controller,
   });
 
   @override
@@ -20,14 +22,14 @@ class StyledTextInput extends StatefulWidget {
 class _StyledTextInputState extends State<StyledTextInput> {
   late String _currentText;
   late FocusNode _focusNode;
-  late TextEditingController _controller;
+  // late TextEditingController _controller;
 
   @override
   void initState() {
     super.initState();
     _currentText = widget.initialText;
     _focusNode = widget.focusNode ?? FocusNode();
-    _controller = TextEditingController();
+    // _controller = TextEditingController();
 
     // Request focus when widget initializes
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -37,7 +39,7 @@ class _StyledTextInputState extends State<StyledTextInput> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    // _controller.dispose();
     // Only dispose the focus node if we created it
     if (widget.focusNode == null) {
       _focusNode.dispose();
@@ -53,7 +55,7 @@ class _StyledTextInputState extends State<StyledTextInput> {
         showCursor: true,
         autofocus: true,
         focusNode: _focusNode,
-        controller: _controller,
+        controller: widget.controller,
         textAlign: TextAlign.center,
         textDirection: TextDirection.rtl,
         style: widget.textStyle,
