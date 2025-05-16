@@ -21,40 +21,30 @@ class _GradientStyleState extends State<GradientStyle> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        SizedBox(
-          // width: MediaQuery.of(context).size.width * 0.7,
-          child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: lines.map((txt) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: IntrinsicWidth(
-                        child: Padding(
-                          padding: const EdgeInsets.all(2),
-                          child: Container(
-                            padding: const EdgeInsets.all(2),
-                            color: Colors.white,
-                            child: Opacity(
-                              opacity: 0,
-                              child: Text(
-                                txt,
-                                style: TextStyle(
-                                  fontSize: widget.valueFontSize,
-                                ),
-                              ),
-                            ),
-                          ),
+        Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: lines.map((txt) {
+              return Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(2),
+                  child: Container(
+                    padding: const EdgeInsets.all(2),
+                    color: Colors.white,
+                    child: Opacity(
+                      opacity: 0,
+                      child: Text(
+                        txt,
+                        style: TextStyle(
+                          fontSize: widget.valueFontSize,
                         ),
                       ),
                     ),
-                  ],
-                );
-              }).toList()),
-        ),
+                  ),
+                ),
+              );
+            }).toList()),
         widget.child ?? Container()
       ],
     );

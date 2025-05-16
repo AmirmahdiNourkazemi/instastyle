@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     storagePermission();
     export = Export(context: context, text: text);
-    _textController.text = text;
+    // _textController.text = text;
   }
 
   @override
@@ -78,36 +78,37 @@ class _HomeScreenState extends State<HomeScreen> {
               child: RepaintBoundary(
                 key: _globalKey,
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    // child: childStyle(
-                    //   child: StyledTextInput(
-                    //       textStyle: selectedStyle.copyWith(
-                    //         fontSize: valueFontSize,
-                    //         color: selectColor,
-                    //       ),
-                    //       onTextChanged: (value) {
-                    //         setState(() {
-                    //           text = value;
-                    //         });
-                    //       }),
-                    // ),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  // child: childStyle(
+                  //   child: StyledTextInput(
+                  //       textStyle: selectedStyle.copyWith(
+                  //         fontSize: valueFontSize,
+                  //         color: selectColor,
+                  //       ),
+                  //       onTextChanged: (value) {
+                  //         setState(() {
+                  //           text = value;
+                  //         });
+                  //       }),
+                  // ),
+                  child: dynamicTextStyle(
+                    valueFontSize: valueFontSize,
+                    text: text,
                     child: childStyle(
-                      child: dynamicTextStyle(
-                        valueFontSize: valueFontSize,
-                        text: text,
-                        child: StyledTextInput(
-                            controller: _textController,
-                            textStyle: selectedStyle.copyWith(
-                              fontSize: valueFontSize,
-                              color: selectColor,
-                            ),
-                            onTextChanged: (value) {
-                              setState(() {
-                                text = value;
-                              });
-                            }),
-                      ),
-                    )),
+                      child: StyledTextInput(
+                          controller: _textController,
+                          textStyle: selectedStyle.copyWith(
+                            fontSize: valueFontSize,
+                            color: selectColor,
+                          ),
+                          onTextChanged: (value) {
+                            setState(() {
+                              text = value;
+                            });
+                          }),
+                    ),
+                  ),
+                ),
               ),
             ),
             Positioned(

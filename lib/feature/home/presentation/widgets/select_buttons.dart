@@ -44,17 +44,13 @@ class _SelectButtonsState extends State<SelectButtons> {
           : widget.onSelect == 3
               ? StyleListView(
                   onWidgetSelected: widget.onWidgetSelected,
+                  onDynamicWidgetSelected: widget.onDynamicWidgetSelected,
                 )
               : widget.onSelect == 2
-                  ? ColorListView(
+                  ? ColorListView(  
                       colorSelected: widget.onColorSelected,
                     )
-                  : widget.onSelect == 4
-                      ? TextStyleListView(
-                          onDynamicWidgetSelected:
-                              widget.onDynamicWidgetSelected,
-                        )
-                      : null,
+                  : null,
     );
   }
 }

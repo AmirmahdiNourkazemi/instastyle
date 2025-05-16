@@ -22,7 +22,7 @@ class _TextStyleListViewState extends State<TextStyleListView> {
     'assets/images/light_iphone.png',
     'assets/images/dark_iphone.png',
     'assets/images/style_lightBox.jpg',
-    'assets/images/glow.png'
+    'assets/images/glow.png',
   ];
   @override
   void initState() {
@@ -42,11 +42,7 @@ class _TextStyleListViewState extends State<TextStyleListView> {
           setState(() {
             selectedIndex = index;
           });
-          widget.onDynamicWidgetSelected((
-                  {required child,
-                  required String text,
-                  required double valueFontSize}) =>
-              dynamicTextStyle[index].builder!(child, text, valueFontSize));
+         
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
