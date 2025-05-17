@@ -42,7 +42,9 @@ class _FooterButtonsState extends State<FooterButtons> {
           },
           text: Text(
             'فونت',
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+               color: isSelected ==1 ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.onSurface,
+            ),
           ),
         ),
         customTextButton(
@@ -56,7 +58,9 @@ class _FooterButtonsState extends State<FooterButtons> {
           },
           text: Text(
             'رنگ',
-            style: Theme.of(context).textTheme.bodyMedium,
+             style: Theme.of(context).textTheme.titleMedium!.copyWith(
+               color: isSelected == 2 ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.onSurface,
+            ),
           ),
         ),
         customTextButton(
@@ -70,7 +74,9 @@ class _FooterButtonsState extends State<FooterButtons> {
           },
           text: Text(
             'استایل',
-            style: Theme.of(context).textTheme.bodyMedium,
+             style: Theme.of(context).textTheme.titleMedium!.copyWith(
+               color: isSelected == 3 ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.onSurface,
+            ),
           ),
         ),
         customTextButton(
@@ -84,7 +90,9 @@ class _FooterButtonsState extends State<FooterButtons> {
           },
           text: Text(
             'متن',
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(
+               color: isSelected == 4 ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.onSurface,
+            ),
           ),
         ),
       ],
@@ -99,6 +107,10 @@ Widget customTextButton(
     required bool isSelected}) {
   return TextButton(
     style: TextButton.styleFrom(
+      
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(
+        Radius.circular(15),
+      )),
       backgroundColor: isSelected
           ? Theme.of(context).colorScheme.primary
           : Colors.transparent,

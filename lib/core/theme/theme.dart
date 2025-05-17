@@ -2,106 +2,139 @@ import "package:flutter/material.dart";
 
 class AppTheme {
   static TextTheme textTheme = appTextTheme;
+  static const Color primary = Color(0xFF169056);
 
+  // Tints (lighter versions)
+  static const Color primaryLight1 = Color(0xFFD5EDE0);
+  static const Color primaryLight2 = Color(0xFFE6F4EB);
+  static const Color primaryLight3 = Color(0xFFF2F9F5);
+  static const Color primaryLight4 = Color(0xFFF8FCFA);
+  static const Color primaryLight5 = Color(0xFFFCFEFD);
+
+  ///
+  static const Color primaryLight6 = Color(0xFF6F6F6F);
+  // Shades (darker versions)
+  static const Color primaryDark1 = Color(0xFF127D4C);
+  static const Color primaryDark2 = Color(0xFF0E6A41);
+  static const Color primaryDark3 = Color(0xFF0A5836);
+  static const Color primaryDark4 = Color(0xFF07452B);
+
+  // Define a common text theme
+
+  static const TextTheme _textTheme = TextTheme(
+    displayLarge: TextStyle(
+      fontFamily: 'IRB',
+      fontWeight: FontWeight.w600,
+      fontSize: 20.0, // Replace with your large font size
+    ),
+    headlineSmall: TextStyle(
+      fontFamily: 'IRB',
+      fontWeight: FontWeight.w600,
+      fontSize: 12.0, // Replace with your small font size
+    ),
+    headlineMedium: TextStyle(
+      fontFamily: 'IRB',
+      fontWeight: FontWeight.w700,
+      fontSize: 16.0, // Replace with your medium font size
+    ),
+    displaySmall: TextStyle(
+      fontFamily: 'IRL',
+      fontWeight: FontWeight.w300,
+      fontSize: 24.0, // Replace with your small font size
+    ),
+    displayMedium: TextStyle(
+      fontFamily: 'IRM',
+      fontWeight: FontWeight.w400,
+      fontSize: 28.0, // Replace with your normal font size
+    ),
+    titleLarge: TextStyle(
+      fontFamily: 'IRB',
+      fontWeight: FontWeight.w700,
+      fontSize: 20.0,
+    ),
+    titleMedium: TextStyle(
+      fontFamily: 'IRB',
+      fontWeight: FontWeight.w700,
+      fontSize: 16.0,
+    ),
+    titleSmall: TextStyle(
+      fontFamily: 'IRB',
+      fontWeight: FontWeight.w700,
+      fontSize: 14.0,
+    ),
+    bodySmall: TextStyle(
+      fontFamily: 'IRL',
+      fontWeight: FontWeight.normal,
+      fontSize: 12.0,
+    ),
+    bodyMedium: TextStyle(
+      fontFamily: 'IRM',
+      fontWeight: FontWeight.w400,
+      fontSize: 14,
+    ),
+    bodyLarge: TextStyle(
+      fontFamily: 'IRR',
+      fontWeight: FontWeight.w500,
+      fontSize: 16.0,
+    ),
+    labelSmall: TextStyle(
+      fontFamily: 'IRL',
+      fontWeight: FontWeight.w100,
+      fontSize: 12.0,
+    ),
+    labelMedium: TextStyle(
+      fontFamily: 'IRM',
+      fontWeight: FontWeight.w300,
+      fontSize: 16.0,
+      letterSpacing: 0.5,
+    ),
+    labelLarge: TextStyle(
+      fontFamily: 'IRM',
+      fontWeight: FontWeight.w400,
+      fontSize: 20.0,
+    ),
+  );
+  // Light Theme
   static ColorScheme lightScheme() {
     return const ColorScheme(
       brightness: Brightness.light,
-      primary: Color(0xff4CAF50),
-      surfaceTint: Color(0xff4CAF50),
-      onPrimary: Color(4294967295),
-      primaryContainer: Color(4290572468),
-      onPrimaryContainer: Color(4288795546),
-      secondary: Color(0xff8BC34A),
-      onSecondary: Color(4294967295),
-      secondaryContainer: Color(4291620260),
-      onSecondaryContainer: Color(4279181312),
-      tertiary: Color(4282804017),
-      onTertiary: Color(4294967295),
-      tertiaryContainer: Color(4291227305),
-      onTertiaryContainer: Color(4278788352),
-      error: Color(4290386458),
-      onError: Color(4294967295),
-      errorContainer: Color(4294957782),
-      onErrorContainer: Color(4282449922),
-      surface: Color(4294441969),
-      onSurface: Color(4279835927),
-      onSurfaceVariant: Color(4282534208),
-      outline: Color(4285692271),
-      outlineVariant: Color(4290955709),
-      shadow: Color(4278190080),
-      scrim: Color(4278190080),
-      inverseSurface: Color(4281152044),
-      inversePrimary: Color(4288795546),
-      primaryFixed: Color(4290572468),
-      onPrimaryFixed: Color(4278198788),
-      primaryFixedDim: Color(0xff7bc171),
-      onPrimaryFixedVariant: Color(4280504356),
-      secondaryFixed: Color(4291620260),
-      onSecondaryFixed: Color(4279181312),
-      secondaryFixedDim: Color(4289843594),
-      onSecondaryFixedVariant: Color(4281617942),
-      tertiaryFixed: Color(4291227305),
-      onTertiaryFixed: Color(4278788352),
-      tertiaryFixedDim: Color(4289450640),
-      onTertiaryFixedVariant: Color(4281290523),
-      surfaceDim: Color(4292402130),
-      surfaceBright: Color(4294441969),
-      surfaceContainerLowest: Color(4294967295),
-      surfaceContainerLow: Color(4294047212),
-      surfaceContainer: Color(4293717990),
-      surfaceContainerHigh: Color(4293323232),
-      surfaceContainerHighest: Color(4292928731),
-    );
-  }
+      primary: Color(0xFF169056), // New primary color
+      onPrimary: Color(0xffffffff),
+      primaryContainer: Color(0xFFD5EDE0),
+      onPrimaryContainer: Color(0xFF07452B),
 
-  static ColorScheme darkScheme() {
-    return const ColorScheme(
-      brightness: Brightness.dark,
-      primary: Color(0xff4caf50),
-      surfaceTint: Color(4288795546),
-      onPrimary: Color(0xff282828),
-      primaryContainer: Color(4285308008),
-      onPrimaryContainer: Color(4278190080),
-      secondary: Color(0xffb5d58e),
-      onSecondary: Color(4278983168),
-      secondaryContainer: Color(4286356057),
-      onSecondaryContainer: Color(4278190080),
-      tertiary: Color(4289713811),
-      onTertiary: Color(4278655744),
-      tertiaryContainer: Color(4286028638),
-      onTertiaryContainer: Color(4278190080),
-      error: Color(4294949553),
-      onError: Color(4281794561),
-      errorContainer: Color(4294923337),
-      onErrorContainer: Color(4278190080),
-      surface: Color(0xff18181B),
-      onSurface: Color(4294573299),
-      onSurfaceVariant: Color(4291218881),
-      outline: Color(4288587162),
-      outlineVariant: Color(4286481787),
-      shadow: Color(4278190080),
-      scrim: Color(4278190080),
-      inverseSurface: Color(4292928731),
-      inversePrimary: Color(4280635685),
-      primaryFixed: Color(4290572468),
-      onPrimaryFixed: Color(4278195714),
-      primaryFixedDim: Color(4288795546),
-      onPrimaryFixedVariant: Color(4279320341),
-      secondaryFixed: Color(4291620260),
-      onSecondaryFixed: Color(4278719488),
-      secondaryFixedDim: Color(4289843594),
-      onSecondaryFixedVariant: Color(4280564998),
-      tertiaryFixed: Color(4291227305),
-      onTertiaryFixed: Color(4278523136),
-      tertiaryFixedDim: Color(4289450640),
-      onTertiaryFixedVariant: Color(4280237323),
-      surfaceDim: Color(4279243791),
-      surfaceBright: Color(4281743924),
-      surfaceContainerLowest: Color(4278914826),
-      surfaceContainerLow: Color(4279835927),
-      surfaceContainer: Color(4280099099),
-      surfaceContainerHigh: Color(4280757029),
-      surfaceContainerHighest: Color(4281480752),
+      // Secondary Colors (complementary to green)
+      secondary: Color(0xFF168A7A), // Teal green
+      onSecondary: Color(0xffffffff),
+      secondaryContainer: Color(0xFFD0F0EB),
+      onSecondaryContainer: Color(0xFF073D35),
+
+      // Tertiary Colors (accent color)
+      tertiary: Color(0xFF6A8F16), // Olive green
+      onTertiary: Color(0xFF1F2607),
+      tertiaryContainer: Color(0xFFE5F2D0),
+      onTertiaryContainer: Color(0xFF172407),
+
+      error: Color(0xffd32f2f),
+      onError: Color(0xffffffff),
+      errorContainer: Color(0xffffe0e0),
+      onErrorContainer: Color(0xff7f0000),
+
+      surface: Color(0xFFD5EDE0), // Light greenish white
+      onSurface: Color(0xff242924),
+      onSurfaceVariant: Color(0xff5a635a),
+      outline: Color(0xff8e9e8e),
+
+      inverseSurface: Color(0xff323E32),
+      inversePrimary: Color(0xFF169056),
+
+      surfaceContainerLowest: Color(0xffffffff),
+      surfaceContainerLow: Color(0xffF0F9F3),
+      surfaceContainer: Color(0xffE0F2E7),
+
+      surfaceTint: Color(0xFF169056),
+      shadow: Color(0xff000000),
+      scrim: Color(0xff000000),
     );
   }
 
@@ -109,49 +142,90 @@ class AppTheme {
     return theme(lightScheme());
   }
 
+  static ColorScheme darkScheme() {
+    return const ColorScheme(
+      brightness: Brightness.dark,
+      
+      primary: Color(0xFF3DB978), // Brighter green for dark mode
+      onPrimary: Color(0xff272A28),
+      primaryContainer: Color(0xFF07452B),
+      onPrimaryContainer: Color(0xffD5EDE0),
+
+      // Secondary Colors
+      secondary: Color(0xFF2DC1AD), // Brighter teal for dark mode
+      onSecondary: Color(0xff272A29),
+      secondaryContainer: Color(0xFF073D35),
+      onSecondaryContainer: Color(0xFFD0F0EB),
+
+      // Tertiary Colors
+      tertiary: Color(0xFFA5D12E), // Brighter olive for dark mode
+      onTertiary: Color(0xFF262807),
+      tertiaryContainer: Color(0xFF3D4E07),
+      onTertiaryContainer: Color(0xFFE5F2D0),
+
+      error: Color(0xffcf6679),
+      onError: Color(0xff370000),
+      errorContainer: Color(0xff93000a),
+      onErrorContainer: Color(0xffffe0e0),
+
+      surface: Color(0xff181B19),
+      onSurface: Color(0xffE4E7E4),
+      onSurfaceVariant: Color(0xffA1AAA1),
+      outline: Color(0xff717A71),
+
+      inverseSurface: Color(0xffDAD9D8),
+      inversePrimary: Color(0xFF3DB978),
+
+      surfaceContainerLowest: Color(0xff0F110F),
+      surfaceContainerLow: Color(0xff181B19),
+      surfaceContainer: Color(0xff1E211E),
+
+      surfaceTint: Color(0xFF3DB978),
+      shadow: Color(0xff000000),
+      scrim: Color(0xff000000),
+    );
+  }
+
   static ThemeData dark() {
     return theme(darkScheme());
   }
 
   static ThemeData theme(ColorScheme colorScheme) => ThemeData(
-      brightness: colorScheme.brightness,
-      colorScheme: colorScheme,
-      iconTheme: IconThemeData(
-        color: colorScheme.inversePrimary,
-      ),
-      bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: colorScheme.onPrimary,
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-        foregroundColor: WidgetStatePropertyAll<Color>(colorScheme.onPrimary),
-        textStyle: WidgetStatePropertyAll<TextStyle>(textTheme.bodyMedium!),
-        splashFactory: InkRipple.splashFactory,
-        shadowColor: WidgetStatePropertyAll<Color>(colorScheme.inversePrimary),
-        shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Dimensions.cornerRadiusSmall),
-        )),
-        backgroundColor: WidgetStateProperty.all(colorScheme.primary),
-      )),
-      buttonTheme: ButtonThemeData(
-        buttonColor: colorScheme.primary,
-        textTheme: ButtonTextTheme.primary,
+        brightness: colorScheme.brightness,
+        dividerTheme: DividerThemeData(
+          color: colorScheme.surface,
+        ),
         colorScheme: colorScheme,
-      ),
-      appBarTheme: AppBarTheme(
-        backgroundColor: colorScheme.primary,
-        foregroundColor: colorScheme.onPrimary,
-      ),
-      textTheme: textTheme,
-      scaffoldBackgroundColor: colorScheme.surface,
-      canvasColor: colorScheme.surface,
-      dividerColor: colorScheme.onPrimary,
-      dividerTheme: DividerThemeData(
-        color: colorScheme.outlineVariant,
-      ));
-
-  List<ExtendedColor> get extendedColors => [];
+        iconTheme: IconThemeData(
+          color: colorScheme.inversePrimary,
+        ),
+        
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: colorScheme.onPrimary,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+          foregroundColor: WidgetStatePropertyAll<Color>(colorScheme.onPrimary),
+          textStyle: WidgetStatePropertyAll<TextStyle>(textTheme.bodyMedium!),
+          splashFactory: InkRipple.splashFactory,
+          shadowColor:
+              WidgetStatePropertyAll<Color>(colorScheme.inversePrimary),
+          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(Dimensions.cornerRadiusSmall),
+          )),
+          backgroundColor: WidgetStateProperty.all(colorScheme.primary),
+        )),
+        buttonTheme: ButtonThemeData(
+          buttonColor: colorScheme.primary,
+          textTheme: ButtonTextTheme.primary,
+          colorScheme: colorScheme,
+        ),
+        
+        textTheme: textTheme,
+        scaffoldBackgroundColor: colorScheme.surface,
+        canvasColor: colorScheme.surface,
+      );
 }
 
 class ExtendedColor {
