@@ -44,6 +44,7 @@ class _FontsListViewState extends State<FontsListView> {
                 textStyleConfigs[index].name,
                 style: textStyleConfigs[index].toTextStyle().copyWith(
                       color: Theme.of(context).colorScheme.primary,
+                      letterSpacing: 0.2
                     ),
                 textDirection: TextDirection.rtl,
               ),

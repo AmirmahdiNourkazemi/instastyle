@@ -156,7 +156,10 @@ flutter:
         - asset: assets/fonts/Vestha.ttf
     - family: peyda
       fonts:
-        - asset: assets/fonts/Peyda.ttf                                                            
+        - asset: assets/fonts/Peyda.ttf         
+    - family: sf
+      fonts:
+        - asset: assets/fonts/SF.ttf                                                              
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

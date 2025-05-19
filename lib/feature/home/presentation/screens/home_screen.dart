@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
               style: Theme.of(context)
                   .textTheme
                   .titleSmall!
-                  .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                  .copyWith(color: Theme.of(context).colorScheme.onSurface),
             ),
           ),
         )
@@ -128,6 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: StyledTextInput(
                           controller: _textController,
                           textStyle: selectedStyle.copyWith(
+                            letterSpacing: 0.2,
                             fontSize: valueFontSize,
                             color: selectColor ?? Theme.of(context).colorScheme.onSurface,
                           ),

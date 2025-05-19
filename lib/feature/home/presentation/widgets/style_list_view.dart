@@ -25,7 +25,9 @@ class _StyleListViewState extends State<StyleListView> {
     'assets/images/dark_iphone.png',
     'assets/images/style_lightBox.jpg',
     'assets/images/glow.png',
-    'assets/images/glow.png'
+    'assets/images/style_shadowLine.png',
+    'assets/images/style_simple.png',
+    'assets/images/glow.png',
   ];
   @override
   void initState() {
@@ -91,8 +93,8 @@ class _StyleListViewState extends State<StyleListView> {
               border: Border.all(
                 color: selectedIndex == index
                     ? Theme.of(context).colorScheme.primary
-                    : Theme.of(context).colorScheme.inversePrimary,
-                width: 2,
+                    : Theme.of(context).colorScheme.onPrimary,
+                width: selectedIndex == index ? 2 : 1,
               ),
               borderRadius: BorderRadius.circular(10),
             ),
