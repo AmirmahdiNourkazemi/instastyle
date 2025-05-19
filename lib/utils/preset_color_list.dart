@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 List<Color> presetColors = [
   Colors.white,
+  Colors.black,
   Colors.red,
   Colors.pink,
   Colors.purple,

@@ -27,7 +27,7 @@ class _IphoneNoteDarkState extends State<IphoneNoteDark> {
             vertical: 40
           ),
           decoration:  BoxDecoration(
-            color: Colors.black.withOpacity(0.5),
+            color: Colors.black.withOpacity(0.2),
            borderRadius: const BorderRadius.vertical(
              bottom: Radius.circular(10)  
            )

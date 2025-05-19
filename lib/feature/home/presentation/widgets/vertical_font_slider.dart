@@ -26,6 +26,7 @@ class _VerticalFontSliderState extends State<VerticalFontSlider> {
         child: Slider(
           min: 10,
           max: 70,
+          inactiveColor: Colors.white,
           value: _currentSize,
           onChanged: (value) {
             setState(() {

@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     storagePermission();
     export = Export(context: context, text: text);
-    _textController.text = text;
+    // _textController.text = text;
   }
 
   @override
@@ -67,8 +67,38 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink,
-      appBar: appBar(title: 'InstaStyle'),
+      // backgroundColor: Colors.pink,
+      appBar: appBar(title: 'InstaStyle', actions: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            iconAlignment: IconAlignment.end,
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+              ),
+              backgroundColor:
+                  MaterialStateProperty.all(Theme.of(context).colorScheme.primary.withOpacity(0.6)),
+            ),
+            onPressed: () {
+              FocusScope.of(context).unfocus();
+              Future.delayed(const Duration(milliseconds: 500)).then((_) {
+                export.captureAndCopy(_globalKey);
+              });
+              
+            },
+            child: Text(
+              'کپی فونت',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall!
+                  .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+            ),
+          ),
+        )
+      ]),
       body: Container(
         color: Colors.transparent,
         child: Stack(
@@ -78,52 +108,53 @@ class _HomeScreenState extends State<HomeScreen> {
               child: RepaintBoundary(
                 key: _globalKey,
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    // child: childStyle(
-                    //   child: StyledTextInput(
-                    //       textStyle: selectedStyle.copyWith(
-                    //         fontSize: valueFontSize,
-                    //         color: selectColor,
-                    //       ),
-                    //       onTextChanged: (value) {
-                    //         setState(() {
-                    //           text = value;
-                    //         });
-                    //       }),
-                    // ),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  // child: childStyle(
+                  //   child: StyledTextInput(
+                  //       textStyle: selectedStyle.copyWith(
+                  //         fontSize: valueFontSize,
+                  //         color: selectColor,
+                  //       ),
+                  //       onTextChanged: (value) {
+                  //         setState(() {
+                  //           text = value;
+                  //         });
+                  //       }),
+                  // ),
+                  child: dynamicTextStyle(
+                    valueFontSize: valueFontSize,
+                    text: text,
                     child: childStyle(
-                      child: dynamicTextStyle(
-                        valueFontSize: valueFontSize,
-                        text: text,
-                        child: StyledTextInput(
-                            controller: _textController,
-                            textStyle: selectedStyle.copyWith(
-                              fontSize: valueFontSize,
-                              color: selectColor,
-                            ),
-                            onTextChanged: (value) {
-                              setState(() {
-                                text = value;
-                              });
-                            }),
-                      ),
-                    )),
+                      child: StyledTextInput(
+                          controller: _textController,
+                          textStyle: selectedStyle.copyWith(
+                            fontSize: valueFontSize,
+                            color: selectColor,
+                          ),
+                          onTextChanged: (value) {
+                            setState(() {
+                              text = value;
+                            });
+                          }),
+                    ),
+                  ),
+                ),
               ),
             ),
-            Positioned(
-              top: 10,
-              right: 10,
-              child: ElevatedButton.icon(
-                iconAlignment: IconAlignment.end,
-                onPressed: () {
-                  FocusScope.of(context).unfocus();
-                  Future.delayed(const Duration(milliseconds: 500));
-                  export.captureAndCopy(_globalKey);
-                },
-                label: const Text('کپی فونت'),
-                icon: const Icon(Icons.copy),
-              ),
-            ),
+            // Positioned(
+            //   top: 10,
+            //   right: 10,
+            //   child: ElevatedButton.icon(
+            //     iconAlignment: IconAlignment.end,
+            //     onPressed: () {
+            //       FocusScope.of(context).unfocus();
+            //       Future.delayed(const Duration(milliseconds: 500));
+            //       export.captureAndCopy(_globalKey);
+            //     },
+            //     label: const Text('کپی فونت'),
+            //     icon: const Icon(Icons.copy),
+            //   ),
+            // ),
             VerticalFontSlider(
               initialSize: valueFontSize,
               onSizeChanged: (value) {
