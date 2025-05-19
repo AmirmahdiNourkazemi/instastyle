@@ -12,6 +12,11 @@ final List<TextStyleConfig> textStyleConfigs = [
   TextStyleConfig(name: 'دارک', fontFamily: 'dark'),
   TextStyleConfig(name: 'دانا', fontFamily: 'dana'),
   TextStyleConfig(name: 'دستنویس', fontFamily: 'dastnevis'),
-
+  TextStyleConfig(name: 'خوزستان', fontFamily: 'khozestan'),
+  TextStyleConfig(name: 'پیدا', fontFamily: 'peyda'),
+  TextStyleConfig(name: 'وستها', fontFamily: 'vestha'),
+  TextStyleConfig(name: 'ایرانیکا', fontFamily: 'IRS'),
+  TextStyleConfig(name: 'فیروز', fontFamily: 'firoz'),
+  
   // Add more styles as needed
 ];

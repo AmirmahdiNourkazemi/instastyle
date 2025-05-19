@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
           required double valueFontSize}) =>
       Container(child: child);
   final TextEditingController _textController = TextEditingController();
-  Color selectColor = Colors.black;
+  Color? selectColor ;
   String text = 'اینجا بنویس...';
   double valueFontSize = 18;
   int isSelected = 0;
@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           controller: _textController,
                           textStyle: selectedStyle.copyWith(
                             fontSize: valueFontSize,
-                            color: selectColor,
+                            color: selectColor ?? Theme.of(context).colorScheme.onSurface,
                           ),
                           onTextChanged: (value) {
                             setState(() {
