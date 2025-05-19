@@ -19,44 +19,58 @@ class FadeLineText extends StatefulWidget {
 class _FadeLineTextState extends State<FadeLineText> {
   @override
   Widget build(BuildContext context) {
-    final lines = widget.text.split('\n');
+    var lines = widget.text.split('\n');
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: lines.map((line) {
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            // Fade Line Background
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 4),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF8E2DE2) , Color(0xFF4A00E0)],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              width: double.infinity,
-            ),
-            // Text Over Background
-            Opacity(
-              opacity: 0,
-              child: Text(
-                line,
-                style: TextStyle(
-                fontSize: widget.valueFontSize,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-             widget.child ?? Container()
-          ],
-        );
-        
-      }).toList(),
-      
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: lines.map((txt) {
+              return Align(
+                alignment: Alignment.center,
+                child: Padding(
+                      padding: const EdgeInsets.all(2),
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                          colors: [
+                            Colors.white10, // left fade start
+                                
+                            Color.fromARGB(255, 235, 219, 248),
+                            Color.fromARGB(255, 228, 209, 247),
+                            Color.fromARGB(255, 223, 199, 245),
+                            Color.fromARGB(255, 228, 209, 247),
+                            Color.fromARGB(255, 235, 219, 248),
+                                
+                            Colors.white10, // right fade end
+                          ],
+                          stops: [
+                            0.0, 0.3, 0.4, 0.5, 0.6, 0.7,
+                            1.0, // control fade position
+                          ],
+                        )),
+                        child: Opacity(
+                          opacity: 0,
+                          child: Text(
+                            txt,
+                            style: TextStyle(
+                              // height: 3,
+                              fontSize: widget.valueFontSize ,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+              );
+            }).toList()),
+        Container(
+          color: Colors.red,
+          child: widget.child,
+        ) ?? Container()
+      ],
     );
   }
 }

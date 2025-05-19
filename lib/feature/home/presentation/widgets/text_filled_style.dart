@@ -22,6 +22,7 @@ class StyledTextInput extends StatefulWidget {
 class _StyledTextInputState extends State<StyledTextInput> {
   late String _currentText;
   late FocusNode _focusNode;
+  var line;
   // late TextEditingController _controller;
 
   @override
@@ -60,6 +61,7 @@ class _StyledTextInputState extends State<StyledTextInput> {
         textDirection: TextDirection.rtl,
         style: widget.textStyle,
         onChanged: (value) {
+         line =  value.split('\n');
           setState(() {
             _currentText = value;
           });
@@ -67,6 +69,7 @@ class _StyledTextInputState extends State<StyledTextInput> {
         },
         maxLines: null,
         decoration: InputDecoration(
+          contentPadding:  EdgeInsets.all( line!= null  ? line.length * 2 : 2),
           isCollapsed: true,
           hintText: _currentText,
           hintStyle: widget.textStyle,

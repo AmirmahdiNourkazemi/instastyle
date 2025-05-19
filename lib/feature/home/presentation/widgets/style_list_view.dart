@@ -19,16 +19,7 @@ class StyleListView extends StatefulWidget {
 }
 
 class _StyleListViewState extends State<StyleListView> {
-  List<String> image = [
-    'assets/images/style_applemusic.png',
-    'assets/images/light_iphone.png',
-    'assets/images/dark_iphone.png',
-    'assets/images/style_lightBox.jpg',
-    'assets/images/glow.png',
-    'assets/images/style_shadowLine.png',
-    'assets/images/style_simple.png',
-    'assets/images/glow.png',
-  ];
+  List<String> image = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -101,7 +92,10 @@ class _StyleListViewState extends State<StyleListView> {
             child: Center(
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(image[index])),
+                  child: Image.asset(index < dynamicStyle.length
+                      ? dynamicStyle[index].imagePath!
+                      : dynamicTextStyle[index - dynamicStyle.length]
+                          .imagePath!)),
             ),
           ),
         ),

@@ -27,9 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
           required double valueFontSize}) =>
       Container(child: child);
   final TextEditingController _textController = TextEditingController();
-  Color? selectColor ;
+  Color? selectColor;
   String text = 'اینجا بنویس...';
   double valueFontSize = 18;
+  bool changeLineHeight = false;
   int isSelected = 0;
   late Export export;
   final GlobalKey _globalKey = GlobalKey();
@@ -79,15 +80,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
               ),
-              backgroundColor:
-                  MaterialStateProperty.all(Theme.of(context).colorScheme.primary.withOpacity(0.6)),
+              backgroundColor: MaterialStateProperty.all(
+                  Theme.of(context).colorScheme.primary.withOpacity(0.6)),
             ),
             onPressed: () {
               FocusScope.of(context).unfocus();
               Future.delayed(const Duration(milliseconds: 500)).then((_) {
                 export.captureAndCopy(_globalKey);
               });
-              
             },
             child: Text(
               'کپی فونت',
@@ -128,9 +128,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: StyledTextInput(
                           controller: _textController,
                           textStyle: selectedStyle.copyWith(
+                            // height: changeLineHeight ? 2 : null,
                             letterSpacing: 0.2,
                             fontSize: valueFontSize,
-                            color: selectColor ?? Theme.of(context).colorScheme.onSurface,
+                            color: selectColor ??
+                                Theme.of(context).colorScheme.onSurface,
                           ),
                           onTextChanged: (value) {
                             setState(() {
@@ -171,21 +173,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   onWidgetSelected: (styleWidget) {
                     setState(() {
                       childStyle = styleWidget;
+                      changeLineHeight = false;
                     });
                   },
                   onColorSelected: (value) {
                     setState(() {
                       selectColor = value;
+                      changeLineHeight = false;
                     });
                   },
                   onStyleSelected: (style) {
                     setState(() {
                       selectedStyle = style;
+                      changeLineHeight = false;
                     });
                   },
                   onDynamicWidgetSelected: (value) {
                     setState(() {
                       dynamicTextStyle = value;
+                      changeLineHeight = true;
                     });
                   },
                 )),
