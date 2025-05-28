@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class StyledTextInput extends StatefulWidget {
@@ -53,15 +55,21 @@ class _StyledTextInputState extends State<StyledTextInput> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: TextField(
+        // cursorHeight: 10,
+        strutStyle: StrutStyle(
+            leadingDistribution: TextLeadingDistribution.even,
+            leading: (widget.textStyle.fontSize! * 0.05)),
         showCursor: true,
         autofocus: true,
         focusNode: _focusNode,
         controller: widget.controller,
         textAlign: TextAlign.center,
         textDirection: TextDirection.rtl,
-        style: widget.textStyle,
+        style: widget.textStyle!.copyWith(
+          color: Colors.transparent,
+        ),
         onChanged: (value) {
-         line =  value.split('\n');
+          line = value.split('\n');
           setState(() {
             _currentText = value;
           });
@@ -69,7 +77,7 @@ class _StyledTextInputState extends State<StyledTextInput> {
         },
         maxLines: null,
         decoration: InputDecoration(
-          contentPadding:  EdgeInsets.all( line!= null  ? line.length * 2 : 2),
+          // contentPadding:  EdgeInsets.all( line!= null  ? line.length * 2 : 2),
           isCollapsed: true,
           hintText: _currentText,
           hintStyle: widget.textStyle,

@@ -28,23 +28,26 @@ class _FadeLineTextState extends State<FadeLineText> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: lines.map((txt) {
-              return Align(
-                alignment: Alignment.center,
-                child: Padding(
-                      padding: const EdgeInsets.all(2),
+              return Column(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                       padding: const EdgeInsets.all(4),
+                      // padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        padding: const EdgeInsets.all(2),
+                       padding: const EdgeInsets.all(2.0),
                         decoration: const BoxDecoration(
                             gradient: LinearGradient(
                           colors: [
                             Colors.white10, // left fade start
-                                
+                      
                             Color.fromARGB(255, 235, 219, 248),
                             Color.fromARGB(255, 228, 209, 247),
                             Color.fromARGB(255, 223, 199, 245),
                             Color.fromARGB(255, 228, 209, 247),
                             Color.fromARGB(255, 235, 219, 248),
-                                
+                      
                             Colors.white10, // right fade end
                           ],
                           stops: [
@@ -52,24 +55,22 @@ class _FadeLineTextState extends State<FadeLineText> {
                             1.0, // control fade position
                           ],
                         )),
-                        child: Opacity(
-                          opacity: 0,
-                          child: Text(
-                            txt,
-                            style: TextStyle(
-                              // height: 3,
-                              fontSize: widget.valueFontSize ,
-                            ),
+                        child: Text(
+                          txt,
+                          style: TextStyle(
+                            // height: 3,
+                            
+                            fontSize: widget.valueFontSize,
                           ),
                         ),
                       ),
                     ),
+                  ),
+                ],
               );
             }).toList()),
-        Container(
-          color: Colors.red,
-          child: widget.child,
-        ) ?? Container()
+         
+        widget.child ?? Container()
       ],
     );
   }
