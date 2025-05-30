@@ -11,6 +11,6 @@ class DynamicStyle {
 class DynamicTextStyle {
   String? name;
   String? imagePath;
-  Widget Function(Widget child, String text, double valueFontSize)? builder;
+  Widget Function(Widget child, String text, TextStyle textStyle)? builder;
   DynamicTextStyle({this.name, this.imagePath,this.builder});
 }

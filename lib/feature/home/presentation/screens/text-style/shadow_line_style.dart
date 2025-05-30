@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class ShadowLine extends StatefulWidget {
   final Widget? child;
   final String text;
-  final double valueFontSize;
+  final TextStyle textStyle;
   const ShadowLine(
       {super.key,
       required this.child,
       required this.text,
-      required this.valueFontSize});
+      required this.textStyle});
 
   @override
   State<ShadowLine> createState() => _ShadowLineState();
@@ -41,14 +41,9 @@ class _ShadowLineState extends State<ShadowLine> {
                         )
                       ]
                   ),
-                    child: Opacity(
-                      opacity: 0,
-                      child: Text(
-                        txt,
-                        style: TextStyle(
-                          fontSize: widget.valueFontSize,
-                        ),
-                      ),
+                    child: Text(
+                      txt,
+                      style: widget.textStyle,
                     ),
                   ),
                 ),

@@ -14,7 +14,7 @@ class SelectButtons extends StatefulWidget {
       Widget Function(
           {required Widget child,
           required String text,
-          required double valueFontSize})> onDynamicWidgetSelected;
+          required TextStyle textStyle})> onDynamicWidgetSelected;
 
   final ValueChanged<Color> onColorSelected;
   final Widget? child;

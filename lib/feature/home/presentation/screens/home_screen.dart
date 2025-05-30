@@ -21,10 +21,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget Function(
       {required Widget child,
       required String text,
-      required double valueFontSize}) dynamicTextStyle = (
+      required TextStyle textStyle}) dynamicTextStyle = (
           {required Widget child,
           required String text,
-          required double valueFontSize}) =>
+          required TextStyle textStyle}) =>
       Container(child: child);
   final TextEditingController _textController = TextEditingController();
   Color? selectColor;
@@ -34,24 +34,24 @@ class _HomeScreenState extends State<HomeScreen> {
   int isSelected = 0;
   late Export export;
   final GlobalKey _globalKey = GlobalKey();
+  bool colorFlag = false;
   Future<void> storagePermission() async {
     try {
       if (await Permission.photos.request().isGranted ||
           await Permission.mediaLibrary.request().isGranted ||
           await Permission.videos.request().isGranted ||
           await Permission.audio.request().isGranted) {
-        print('Permission granted');
+        // print('Permission granted');
       } else {
-        print('Permission denied');
+        // print('Permission denied');
       }
     } catch (e) {
-      print('Permission request failed: $e');
+      // print('Permission request failed: $e');
     }
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     storagePermission();
     export = Export(context: context, text: text);
@@ -60,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _textController.dispose();
   }
@@ -69,18 +68,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.pink,
-      appBar: appBar(title: 'InstaStyle', actions: [
+      appBar: appBar(title: 'texim', actions: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
             iconAlignment: IconAlignment.end,
             style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
               ),
-              backgroundColor: MaterialStateProperty.all(
+              backgroundColor: WidgetStateProperty.all(
                   Theme.of(context).colorScheme.primary.withOpacity(0.6)),
             ),
             onPressed: () {
@@ -122,17 +121,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   //       }),
                   // ),
                   child: dynamicTextStyle(
-                    valueFontSize: valueFontSize,
+                    textStyle: selectedStyle.copyWith(
+                      letterSpacing: 0.2,
+                      fontSize: valueFontSize,
+                      color: !colorFlag
+                          ? Colors.transparent
+                          : selectColor ??
+                              Theme.of(context).colorScheme.onSurface,
+                    ),
                     text: text,
                     child: childStyle(
                       child: StyledTextInput(
                           controller: _textController,
                           textStyle: selectedStyle.copyWith(
-                            // height: changeLineHeight ? 2 : null,
                             letterSpacing: 0.2,
                             fontSize: valueFontSize,
-                            color: selectColor ??
-                                Theme.of(context).colorScheme.onSurface,
+                            color: colorFlag
+                                ? Colors.transparent
+                                : selectColor ??
+                                    Theme.of(context).colorScheme.onSurface,
                           ),
                           onTextChanged: (value) {
                             setState(() {
@@ -173,25 +180,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   onWidgetSelected: (styleWidget) {
                     setState(() {
                       childStyle = styleWidget;
-                      changeLineHeight = false;
+                    });
+                    setState(() {
+                      colorFlag = false;
                     });
                   },
                   onColorSelected: (value) {
                     setState(() {
                       selectColor = value;
-                      changeLineHeight = false;
+                      // setState(() {
+                      //   colorFlag = false;
+                      // });
                     });
                   },
                   onStyleSelected: (style) {
                     setState(() {
                       selectedStyle = style;
-                      changeLineHeight = false;
                     });
                   },
                   onDynamicWidgetSelected: (value) {
                     setState(() {
                       dynamicTextStyle = value;
-                      changeLineHeight = true;
+                    });
+                    setState(() {
+                      colorFlag = true;
                     });
                   },
                 )),

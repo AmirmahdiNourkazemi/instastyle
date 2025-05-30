@@ -7,42 +7,36 @@ import 'shadow_line_style.dart';
 import 'solid_line_style.dart';
 
 List<DynamicTextStyle> get dynamicTextStyle => [
-    DynamicTextStyle(
+      DynamicTextStyle(
           name: 'fade line',
           imagePath: 'assets/images/style_fadeLine.png',
-          builder: (child, text, valueFontSize) => FadeLineText(
+          builder: (child, text, textStyle) => FadeLineText(
                 text: text,
-                valueFontSize: valueFontSize,
-                key: ValueKey(valueFontSize),
+                textStyle: textStyle,
                 child: child,
               )),
       DynamicTextStyle(
           name: 'solid line',
           imagePath: 'assets/images/style_simple.png',
-          builder: (child, text, valueFontSize) => SolidLine(
+          builder: (child, text, textStyle) => SolidLine(
                 text: text,
-                valueFontSize: valueFontSize,
-                key: ValueKey(valueFontSize),
+                textStyle: textStyle,
                 child: child,
               )),
-                DynamicTextStyle(
+      DynamicTextStyle(
           name: 'shadow line',
           imagePath: 'assets/images/style_shadowLine.png',
-          builder: (child, text, valueFontSize) => ShadowLine(
+          builder: (child, text, textStyle) => ShadowLine(
                 text: text,
-                valueFontSize: valueFontSize,
-                key: ValueKey(valueFontSize),
+                textStyle: textStyle,
                 child: child,
               )),
-              DynamicTextStyle(
+      DynamicTextStyle(
           name: 'solid line border',
           imagePath: 'assets/images/style_alphaBox.png',
-          builder: (child, text, valueFontSize) => SolidLineBorder(
+          builder: (child, text, textStyle) => SolidLineBorder(
                 text: text,
-                valueFontSize: valueFontSize,
-                key: ValueKey(valueFontSize),
+                textStyle: textStyle,
                 child: child,
               )),
-             
-              
     ];

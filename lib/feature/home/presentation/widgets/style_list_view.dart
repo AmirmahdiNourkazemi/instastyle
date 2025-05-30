@@ -8,7 +8,7 @@ class StyleListView extends StatefulWidget {
       Widget Function(
           {required Widget child,
           required String text,
-          required double valueFontSize})> onDynamicWidgetSelected;
+          required TextStyle textStyle})> onDynamicWidgetSelected;
   const StyleListView(
       {super.key,
       required this.onWidgetSelected,
@@ -30,12 +30,16 @@ class _StyleListViewState extends State<StyleListView> {
   bool? isDynamicStyleSelected; // Track which list is selected
 
   void _resetSelections() {
+    setState(() {
+      // selectedIndex   = null;
+      isDynamicStyleSelected = null;
+    });
     // Reset both handlers to their default states
     widget.onWidgetSelected(({required child}) => Container(child: child));
     widget.onDynamicWidgetSelected((
             {required child,
             required String text,
-            required double valueFontSize}) =>
+            required TextStyle textStyle}) =>
         Container(child: child));
   }
 
@@ -69,9 +73,9 @@ class _StyleListViewState extends State<StyleListView> {
             widget.onDynamicWidgetSelected((
                     {required child,
                     required String text,
-                    required double valueFontSize}) =>
+                    required TextStyle textStyle}) =>
                 dynamicTextStyle[textStyleIndex].builder!(
-                    child, text, valueFontSize));
+                    child, text, textStyle));
           }
         },
         child: Padding(

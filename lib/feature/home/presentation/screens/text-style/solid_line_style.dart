@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class SolidLine extends StatefulWidget {
   final Widget? child;
   final String text;
-  final double valueFontSize;
+  final TextStyle textStyle;
   const SolidLine(
       {super.key,
       required this.child,
       required this.text,
-      required this.valueFontSize});
+      required this.textStyle});
 
   @override
   State<SolidLine> createState() => _SolidLineState();
@@ -32,14 +32,9 @@ class _SolidLineState extends State<SolidLine> {
                   child: Container(
                     padding: const EdgeInsets.all(2),
                     color: Colors.white,
-                    child: Opacity(
-                      opacity: 0,
-                      child: Text(
-                        txt,
-                        style: TextStyle(
-                          fontSize: widget.valueFontSize,
-                        ),
-                      ),
+                    child: Text(
+                      txt,
+                      style: widget.textStyle,
                     ),
                   ),
                 ),

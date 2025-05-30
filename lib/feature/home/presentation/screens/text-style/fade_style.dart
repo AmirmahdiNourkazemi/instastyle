@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 class FadeLineText extends StatefulWidget {
   final Widget? child;
   final String text;
-  final double valueFontSize;
-
+  final TextStyle textStyle;
   const FadeLineText({
     super.key,
     required this.text,
-    required this.valueFontSize,
+    required this.textStyle,
     this.child,
   });
 
@@ -33,21 +32,21 @@ class _FadeLineTextState extends State<FadeLineText> {
                   Align(
                     alignment: Alignment.center,
                     child: Padding(
-                       padding: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(4),
                       // padding: const EdgeInsets.all(8.0),
                       child: Container(
-                       padding: const EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.all(2.0),
                         decoration: const BoxDecoration(
                             gradient: LinearGradient(
                           colors: [
                             Colors.white10, // left fade start
-                      
+
                             Color.fromARGB(255, 235, 219, 248),
                             Color.fromARGB(255, 228, 209, 247),
                             Color.fromARGB(255, 223, 199, 245),
                             Color.fromARGB(255, 228, 209, 247),
                             Color.fromARGB(255, 235, 219, 248),
-                      
+
                             Colors.white10, // right fade end
                           ],
                           stops: [
@@ -57,11 +56,7 @@ class _FadeLineTextState extends State<FadeLineText> {
                         )),
                         child: Text(
                           txt,
-                          style: TextStyle(
-                            // height: 3,
-                            
-                            fontSize: widget.valueFontSize,
-                          ),
+                          style: widget.textStyle,
                         ),
                       ),
                     ),
@@ -69,7 +64,6 @@ class _FadeLineTextState extends State<FadeLineText> {
                 ],
               );
             }).toList()),
-         
         widget.child ?? Container()
       ],
     );

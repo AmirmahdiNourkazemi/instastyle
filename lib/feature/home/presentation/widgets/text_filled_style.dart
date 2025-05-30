@@ -65,14 +65,8 @@ class _StyledTextInputState extends State<StyledTextInput> {
         controller: widget.controller,
         textAlign: TextAlign.center,
         textDirection: TextDirection.rtl,
-        style: widget.textStyle!.copyWith(
-          color: Colors.transparent,
-        ),
+        style: widget.textStyle,
         onChanged: (value) {
-          line = value.split('\n');
-          setState(() {
-            _currentText = value;
-          });
           widget.onTextChanged(value);
         },
         maxLines: null,
