@@ -9,6 +9,8 @@ import 'text_style_list_view.dart';
 class SelectButtons extends StatefulWidget {
   final int onSelect;
   final ValueChanged<TextStyle> onStyleSelected;
+  final ValueChanged<bool> isFontPro;
+
   final ValueChanged<Widget Function({required Widget child})> onWidgetSelected;
   final ValueChanged<
       Widget Function(
@@ -25,6 +27,7 @@ class SelectButtons extends StatefulWidget {
       required this.onWidgetSelected,
       required this.onColorSelected,
       required this.onDynamicWidgetSelected,
+      required this.isFontPro,
       this.child});
 
   @override
@@ -40,6 +43,7 @@ class _SelectButtonsState extends State<SelectButtons> {
       child: widget.onSelect == 1
           ? FontsListView(
               onStyleSelected: widget.onStyleSelected,
+              isPro: widget.isFontPro,
             )
           : widget.onSelect == 3
               ? StyleListView(
@@ -47,7 +51,7 @@ class _SelectButtonsState extends State<SelectButtons> {
                   onDynamicWidgetSelected: widget.onDynamicWidgetSelected,
                 )
               : widget.onSelect == 2
-                  ? ColorListView(  
+                  ? ColorListView(
                       colorSelected: widget.onColorSelected,
                     )
                   : null,

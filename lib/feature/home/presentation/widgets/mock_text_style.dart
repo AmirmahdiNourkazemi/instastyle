@@ -17,7 +17,7 @@ final List<TextStyleConfig> textStyleConfigs = [
   TextStyleConfig(name: 'پیدا', fontFamily: 'peyda'),
   TextStyleConfig(name: 'وستها', fontFamily: 'vestha'),
   TextStyleConfig(name: 'ایرانیکا', fontFamily: 'IRS'),
-  TextStyleConfig(name: 'فیروز', fontFamily: 'firoz'),
+  TextStyleConfig(name: 'فیروز', fontFamily: 'firoz', isPro: true),
 
   // Add more styles as needed
 ];

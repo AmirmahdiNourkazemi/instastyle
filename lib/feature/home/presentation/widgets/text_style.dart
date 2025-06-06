@@ -7,10 +7,12 @@ class TextStyleConfig {
   final FontWeight fontWeight;
   final FontStyle fontStyle;
   final Color color;
+  final bool? isPro;
 
   TextStyleConfig({
     required this.name,
     required this.fontFamily,
+    this.isPro = false,
     this.fontSize = 24,
     this.fontWeight = FontWeight.normal,
     this.fontStyle = FontStyle.normal,
@@ -42,7 +44,8 @@ class TextStyleConfig {
 
   static FontWeight _parseFontWeight(dynamic weight) {
     if (weight == null) return FontWeight.normal;
-    if (weight is int) return FontWeight.values.firstWhere((e) => e.value == weight);
+    if (weight is int)
+      return FontWeight.values.firstWhere((e) => e.value == weight);
     if (weight == 'bold') return FontWeight.bold;
     if (weight == 'w100') return FontWeight.w100;
     // Add other cases as needed

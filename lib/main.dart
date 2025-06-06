@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:instastyle/core/localstorage/local_data.dart';
+import 'package:instastyle/core/locator/locator.dart';
 import 'package:instastyle/core/theme/theme.dart';
 import 'package:instastyle/feature/home/presentation/screens/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setup();
+  await locator<LocalData>().loadApproToken();
+  await locator<LocalData>().loadFinalToken();
+  await locator<LocalData>().loadUserMobileNumber();
+  await locator<LocalData>().loadImageUrl();
+  await locator<LocalData>().loadFreeUsageCount();
+  await locator<LocalData>().loadStatus();
+  await locator<LocalData>().loadStoreMessageCount();
+  await locator<LocalData>().loadTheme();
   runApp(const MyApp());
 }
 
@@ -22,4 +34,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

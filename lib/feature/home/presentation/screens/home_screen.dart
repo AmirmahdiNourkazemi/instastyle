@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:instastyle/core/localstorage/local_data.dart';
+import 'package:instastyle/core/locator/locator.dart';
 import 'package:instastyle/core/widgets/app_bar.dart';
 import 'package:instastyle/feature/home/presentation/widgets/export_class.dart';
 import 'package:instastyle/feature/home/presentation/widgets/select_buttons.dart';
@@ -16,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextStyle selectedStyle = const TextStyle(fontSize: 24);
+  bool isProFont = false;
   Widget Function({required Widget child}) childStyle =
       ({required Widget child}) => Container(child: child);
   Widget Function(
@@ -79,8 +82,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
               ),
-              backgroundColor: WidgetStateProperty.all(
-                  Theme.of(context).colorScheme.primary.withOpacity(0.6)),
+              backgroundColor: WidgetStateProperty.all(isProFont
+                  ? Colors.grey
+                  : Theme.of(context).colorScheme.primary.withOpacity(0.6)),
             ),
             onPressed: () {
               FocusScope.of(context).unfocus();
@@ -177,6 +181,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 bottom: 8,
                 child: SelectButtons(
                   onSelect: isSelected,
+                  isFontPro: (value) {
+                    setState(() {
+                      isProFont = value;
+                    });
+                  },
                   onWidgetSelected: (styleWidget) {
                     setState(() {
                       childStyle = styleWidget;
