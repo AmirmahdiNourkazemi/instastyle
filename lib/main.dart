@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instastyle/core/localstorage/local_data.dart';
 import 'package:instastyle/core/locator/locator.dart';
 import 'package:instastyle/core/theme/theme.dart';
 import 'package:instastyle/feature/home/presentation/screens/home_screen.dart';
+import 'package:instastyle/feature/status/presentation/bloc/status_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +32,10 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: BlocProvider(
+        create: (context) => locator<StatusBloc>(),
+        child: const HomeScreen(),
+      ),
     );
   }
 }

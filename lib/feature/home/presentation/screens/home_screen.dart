@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instastyle/core/localstorage/local_data.dart';
 import 'package:instastyle/core/locator/locator.dart';
 import 'package:instastyle/core/widgets/app_bar.dart';
@@ -6,7 +7,10 @@ import 'package:instastyle/feature/home/presentation/widgets/export_class.dart';
 import 'package:instastyle/feature/home/presentation/widgets/select_buttons.dart';
 import 'package:instastyle/feature/home/presentation/widgets/text_filled_style.dart';
 import 'package:instastyle/feature/home/presentation/widgets/vertical_font_slider.dart';
+import 'package:instastyle/feature/status/data/model/status_model.dart';
+import 'package:instastyle/feature/status/presentation/bloc/status_event.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../../../status/presentation/bloc/status_bloc.dart';
 import '../widgets/footer_buttons.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -58,7 +62,15 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     storagePermission();
     export = Export(context: context, text: text);
+    BlocProvider.of<StatusBloc>(context)
+        .add(StatusInitialEvent()); // TODO: implement initState>
     // _textController.text = text;
+    paid();
+  }
+
+  Future<void> paid() async {
+    StatusModel? sa = await locator<LocalData>().loadStatus();
+    print(sa!.products!.length);
   }
 
   @override

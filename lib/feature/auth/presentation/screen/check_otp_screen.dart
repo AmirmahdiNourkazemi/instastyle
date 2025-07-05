@@ -16,6 +16,7 @@ import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
 import '../bloc/auth_state.dart';
 import '../bloc/otp_status.dart';
+import 'login_screen.dart';
 
 Future<void> showOtpButtonSheet(BuildContext context, String mobileNumber) {
   return showModalBottomSheet(
@@ -52,165 +53,167 @@ class _CheckOtpScreenState extends State<CheckOtpScreen> {
           create: (context) => locator<StatusBloc>(),
         ),
       ],
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: BlocConsumer<AuthBloc, AuthState>(
-            listener: (context, state) {
-              if (state.otpStatus is OtpSuccess) {
-                BlocProvider.of<StatusBloc>(context).add(StatusInitialEvent());
-                Navigator.of(context).pushReplacementNamed('/home');
-              } else if (state.otpStatus is OtpError) {
-                OtpError error = state.otpStatus as OtpError;
-                showToast(
-                    context, 'خطا', error.message, ToastificationType.error);
-              }
-            },
-            builder: (context, state) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: BlocConsumer<AuthBloc, AuthState>(
+          listener: (context, state) {
+            if (state.otpStatus is OtpSuccess) {
+              BlocProvider.of<StatusBloc>(context).add(StatusInitialEvent());
+              Navigator.of(context).pop();
+            } else if (state.otpStatus is OtpError) {
+              OtpError error = state.otpStatus as OtpError;
+              showToast(
+                  context, 'خطا', error.message, ToastificationType.error);
+            }
+          },
+          builder: (context, state) {
+            return Padding(
+                padding: EdgeInsets.only(
+
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'کد تایید ارسال شده به شماره موبایل ${widget.mobileNumber}',
-                            style: Theme.of(context).textTheme.bodySmall,
-                            textAlign: TextAlign.center,
-                          ),
-                          const SizedBox(width: Dimensions.paddingExtraSmall),
-                          const IconContainer(
-                            icon: MingCute.information_line,
-                            padding: 4,
-                            size: 22,
-                          ),
-                        ],
+                      Text(
+                        'کد تایید ارسال شده به شماره موبایل ${widget.mobileNumber}',
+                        style: Theme.of(context).textTheme.bodySmall,
+                        textAlign: TextAlign.center,
                       ),
-                      const SizedBox(
-                        height: 20,
+                      const SizedBox(width: Dimensions.paddingExtraSmall),
+                      const IconContainer(
+                        icon: MingCute.information_line,
+                        padding: 4,
+                        size: 22,
                       ),
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            Pinput(
-                              length: 5,
-                              pinAnimationType: PinAnimationType.fade,
-                              errorTextStyle: const TextStyle(
-                                fontSize: 12,
-                                color: Colors.red,
-                              ),
-                              separatorBuilder: (index) {
-                                return const SizedBox(
-                                  width: 10,
-                                );
-                              },
-                              defaultPinTheme: PinTheme(
-                                textStyle:
-                                    Theme.of(context).textTheme.bodyMedium,
-                                width: MediaQuery.of(context).size.width / 6,
-                                height: MediaQuery.of(context).size.width / 7,
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primaryContainer,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                              ),
-                              pinContentAlignment: Alignment.center,
-                              animationCurve: Curves.easeInCubic,
-                              controller: _otpControllerText,
-                              keyboardType: TextInputType.number,
-                              closeKeyboardWhenCompleted: true,
-                              errorPinTheme: PinTheme(
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: Colors.red.withOpacity(0.3),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                              ),
-                              androidSmsAutofillMethod:
-                                  AndroidSmsAutofillMethod.smsUserConsentApi,
-                              onCompleted: (value) {
-                                _otpControllerText.text = value;
-                                BlocProvider.of<AuthBloc>(context).add(
-                                    CheckOtpEvent(OtpParams(widget.mobileNumber,
-                                        _otpControllerText.text)));
-                              },
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'لطفا کد تایید خود را وارد کنید';
-                                } else if (value.length != 5) {
-                                  return 'کد تایید صحیح نمی باشد';
-                                } else {
-                                  return null;
-                                }
-                              },
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            SubmitButton(
-                                text: 'ادامه',
-                                isLoading: state.authStatus is OtpLoading,
-                                onClick: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    BlocProvider.of<AuthBloc>(context).add(
-                                        CheckOtpEvent(OtpParams(
-                                            widget.mobileNumber,
-                                            _otpControllerText.text)));
-                                  }
-                                }),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context)
-                                        .pushReplacementNamed('/login');
-                                  },
-                                  child: Text(
-                                    'ویرایش شماره',
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                ),
-                                // OtpTimerButton(
-                                //   buttonType: ButtonType.text_button,
-                                //   loadingIndicator: CircularProgressIndicator(
-                                //     strokeWidth: 2,
-                                //     color: Theme.of(context)
-                                //         .colorScheme
-                                //         .tertiary,
-                                //   ),
-                                //   onPressed: () {
-                                //     Navigator.of(context)
-                                //         .pushReplacementNamed('/login');
-                                //   },
-                                //   text: Text(
-                                //     'ارسال مجدد کد',
-                                //     style: Theme.of(context)
-                                //         .textTheme
-                                //         .bodyMedium,
-                                //   ),
-                                //   duration: 60,
-                                // ),
-                              ],
-                            )
-                          ],
-                        ),
-                      )
                     ],
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Pinput(
+                          length: 5,
+                          pinAnimationType: PinAnimationType.fade,
+                          errorTextStyle: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.red,
+                          ),
+                          separatorBuilder: (index) {
+                            return const SizedBox(
+                              width: 10,
+                            );
+                          },
+                          defaultPinTheme: PinTheme(
+                            textStyle:
+                                Theme.of(context).textTheme.bodyMedium,
+                            width: MediaQuery.of(context).size.width / 6,
+                            height: MediaQuery.of(context).size.width / 7,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                          pinContentAlignment: Alignment.center,
+                          animationCurve: Curves.easeInCubic,
+                          controller: _otpControllerText,
+                          keyboardType: TextInputType.number,
+                          closeKeyboardWhenCompleted: true,
+                          errorPinTheme: PinTheme(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.red.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
+                          androidSmsAutofillMethod:
+                              AndroidSmsAutofillMethod.smsUserConsentApi,
+                          onCompleted: (value) {
+                            _otpControllerText.text = value;
+                            BlocProvider.of<AuthBloc>(context).add(
+                                CheckOtpEvent(OtpParams(widget.mobileNumber,
+                                    _otpControllerText.text)));
+                          },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'لطفا کد تایید خود را وارد کنید';
+                            } else if (value.length != 5) {
+                              return 'کد تایید صحیح نمی باشد';
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SubmitButton(
+                            text: 'ادامه',
+                            isLoading: state.authStatus is OtpLoading,
+                            onClick: () {
+                              if (_formKey.currentState!.validate()) {
+                                BlocProvider.of<AuthBloc>(context).add(
+                                    CheckOtpEvent(OtpParams(
+                                        widget.mobileNumber,
+                                        _otpControllerText.text)));
+                              }
+                            }),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                showLoginButtonSheet(
+                                  context,
+                                );
+                              },
+                              child: Text(
+                                'ویرایش شماره',
+                                style:
+                                    Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                            // OtpTimerButton(
+                            //   buttonType: ButtonType.text_button,
+                            //   loadingIndicator: CircularProgressIndicator(
+                            //     strokeWidth: 2,
+                            //     color: Theme.of(context)
+                            //         .colorScheme
+                            //         .tertiary,
+                            //   ),
+                            //   onPressed: () {
+                            //     Navigator.of(context)
+                            //         .pushReplacementNamed('/login');
+                            //   },
+                            //   text: Text(
+                            //     'ارسال مجدد کد',
+                            //     style: Theme.of(context)
+                            //         .textTheme
+                            //         .bodyMedium,
+                            //   ),
+                            //   duration: 60,
+                            // ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )
                 ],
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
