@@ -113,11 +113,11 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
-        IconButton(
-            onPressed: () {
-              locator<LocalData>().saveApproToken('');
-            },
-            icon: Icon(Icons.add))
+        // IconButton(
+        //     onPressed: () {
+        //       locator<LocalData>().saveApproToken('');
+        //     },
+        //     icon: Icon(Icons.add))
       ]),
       body: Container(
         color: Colors.transparent,
