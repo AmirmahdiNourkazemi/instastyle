@@ -14,7 +14,7 @@ class LocalData {
   static final ValueNotifier<String> ImageUrlNotifier = ValueNotifier('');
   static final ValueNotifier<int?> freeUsageCount = ValueNotifier(1);
   static final ValueNotifier<int?> storeMessageCount = ValueNotifier(4);
-  ValueNotifier<bool> isPaid = ValueNotifier(false);
+  static final ValueNotifier<bool> isPaid = ValueNotifier(false);
 
   Future<void> saveStoreMessageCount(int count) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -65,6 +65,11 @@ class LocalData {
     String statusJson = jsonEncode(status.toJson());
     prefs.setString('statusEntity', statusJson);
     statusNotifier.value = status;
+    isPaid.value = status.products == null
+        ? false
+        : status.products!.isNotEmpty
+            ? true
+            : false;
     loadStatus();
   }
 

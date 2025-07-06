@@ -85,24 +85,6 @@ class _FooterButtonsState extends State<FooterButtons> {
                 ),
           ),
         ),
-        customTextButton(
-          isSelected: isSelected == 4,
-          context: context,
-          onTap: () {
-            toggleSelect(4);
-            setState(() {
-              isSelected = 4;
-            });
-          },
-          text: Text(
-            'متن',
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                  color: isSelected == 4
-                      ? Theme.of(context).colorScheme.surface
-                      : Theme.of(context).colorScheme.onSurface,
-                ),
-          ),
-        ),
       ],
     );
   }
@@ -116,7 +98,6 @@ Widget customTextButton(
   return TextButton(
     style: TextButton.styleFrom(
       side: BorderSide(
-        
           color: isSelected
               ? Theme.of(context).colorScheme.primary
               : Theme.of(context).colorScheme.secondary,

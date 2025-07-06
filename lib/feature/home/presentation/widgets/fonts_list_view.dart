@@ -24,26 +24,37 @@ class _FontsListViewState extends State<FontsListView> {
     // Initialize or update isPaid value here if needed
   }
 
+  bool isLocked = false;
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: locator<LocalData>().isPaid,
-      builder: (context, isPaid, _) {
+    return ValueListenableBuilder(
+      valueListenable: LocalData.isPaid,
+      builder: (context, value, child) {
         return ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: textStyleConfigs.length,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             // Check if the item is pro and user hasn't paid
+
             final isProItem = textStyleConfigs[index].isPro ?? false;
-            final isLocked = isProItem && !isPaid;
+            // if (isProItem) {
+            //   if (value != null) {
+            //     if (value!.products!.length > 0) {
+            //       isLocked = false;
+            //     }
+            //   } else {
+            //     isLocked = true;
+            //   }
+            // }
+            final isLocked = isProItem && !value;
 
             return GestureDetector(
               onTap: () {
                 if (isLocked) {
                   if (LocalData.firstTokenNotifier.value.isEmpty) {
                     showLoginButtonSheet(context);
-                  } else {
+                  } else if (!value) {
                     showProductBottomSheet(context);
                   }
                 }

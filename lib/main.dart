@@ -6,6 +6,7 @@ import 'package:instastyle/core/theme/theme.dart';
 import 'package:instastyle/feature/home/presentation/screens/home_screen.dart';
 import 'package:instastyle/feature/status/presentation/bloc/status_bloc.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
+      navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (context) => locator<StatusBloc>(),

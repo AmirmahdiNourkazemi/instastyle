@@ -65,12 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
     BlocProvider.of<StatusBloc>(context)
         .add(StatusInitialEvent()); // TODO: implement initState>
     // _textController.text = text;
-    paid();
-  }
-
-  Future<void> paid() async {
-    StatusModel? sa = await locator<LocalData>().loadStatus();
-    print(sa!.products!.length);
   }
 
   @override
@@ -83,36 +77,47 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.pink,
-      appBar: appBar(title: 'texim', actions: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ElevatedButton(
-            iconAlignment: IconAlignment.end,
-            style: ButtonStyle(
-              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+      appBar: appBar(title: 'texim', showUsage: true, actions: [
+        ValueListenableBuilder(
+          valueListenable: LocalData.isPaid,
+          builder: (context, value, child) {
+            print(value);
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                iconAlignment: IconAlignment.end,
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                  ),
+                  backgroundColor: WidgetStateProperty.all(!value && isProFont
+                      ? Colors.grey
+                      : Theme.of(context).colorScheme.primary.withOpacity(0.6)),
+                ),
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  Future.delayed(const Duration(milliseconds: 500)).then((_) {
+                    export.captureAndCopy(_globalKey);
+                  });
+                },
+                child: Text(
+                  'کپی فونت',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
                 ),
               ),
-              backgroundColor: WidgetStateProperty.all(isProFont
-                  ? Colors.grey
-                  : Theme.of(context).colorScheme.primary.withOpacity(0.6)),
-            ),
+            );
+          },
+        ),
+        IconButton(
             onPressed: () {
-              FocusScope.of(context).unfocus();
-              Future.delayed(const Duration(milliseconds: 500)).then((_) {
-                export.captureAndCopy(_globalKey);
-              });
+              locator<LocalData>().saveApproToken('');
             },
-            child: Text(
-              'کپی فونت',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .copyWith(color: Theme.of(context).colorScheme.onSurface),
-            ),
-          ),
-        )
+            icon: Icon(Icons.add))
       ]),
       body: Container(
         color: Colors.transparent,
