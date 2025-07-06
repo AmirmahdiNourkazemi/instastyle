@@ -42,6 +42,11 @@ signingConfigs {
             keyPassword = keystoreProperties['keyPassword']
             storeFile = keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
             storePassword = keystoreProperties['storePassword']
+        def marketApplicationId = "ir.mservices.market"
+        def marketBindAddress = "ir.mservices.market.InAppBillingService.BIND"
+        manifestPlaceholders += [marketApplicationId: "${marketApplicationId}",
+                marketBindAddress  : "${marketBindAddress}",
+                marketPermission   : "${marketApplicationId}.BILLING"]  
         }
     }
     buildTypes {

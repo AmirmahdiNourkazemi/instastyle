@@ -1,4 +1,3 @@
-
 import '../../../../core/resources/data_state.dart';
 import '../../../../core/usecase/use_case.dart';
 import '../../../status/data/model/product_model.dart';

@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:instastyle/feature/status/data/model/product_model.dart';
+
 
 import '../../../../core/error/custome_error.dart';
 import '../../../../core/resources/data_state.dart';
+import '../../../status/data/model/product_model.dart';
 import '../../domain/repository/product_repository.dart';
 import '../data_source/remote/product_api_provider.dart';
 
@@ -25,15 +26,27 @@ class ProductRepositoryimp extends ProductRepository {
           errorConvertor(response.statusCode, response.data['message']));
     }
   }
-
+  
   @override
-  Future<DataState<String>> getPayment(String productId) async {
-    Response response = await productApiProvider.getPayment(productId);
-    if (response.statusCode == 200) {
-      return DataSuccess(response.data['url']);
-    } else {
-      return DataError(
+  Future<DataState<String>> getPayment(String productId) async{
+      Response response = await productApiProvider.getPayment(productId);
+      if (response.statusCode == 200) {
+       return DataSuccess(response.data['url']); 
+      }else {
+        return DataError(
           errorConvertor(response.statusCode, response.data['message']));
-    }
+      }
   }
+   @override
+  Future<DataState<String>> myketPayment(String productId, String productUuid) async {
+     String res = await productApiProvider.myketPayment(productId, productUuid);
+
+    if (res == 'ok') {
+     
+      return const DataSuccess('ok');
+      
+  }else {
+    return DataError(errorConvertor(null, 'مشکلی در پرداخت رخ داده است'));
+  }
+}
 }

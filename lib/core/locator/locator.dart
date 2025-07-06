@@ -12,6 +12,7 @@ import 'package:instastyle/feature/auth/presentation/bloc/auth_bloc.dart';
 import 'package:instastyle/feature/product/data/data_source/remote/product_api_provider.dart';
 import 'package:instastyle/feature/product/data/repository/product_repositoryImp.dart';
 import 'package:instastyle/feature/product/domain/repository/product_repository.dart';
+import 'package:instastyle/feature/product/domain/use_case/myket_payment_usecase.dart';
 import 'package:instastyle/feature/product/domain/use_case/payment_usecase.dart';
 import 'package:instastyle/feature/product/domain/use_case/product_usecase.dart';
 import 'package:instastyle/feature/product/presentation/bloc/product_bloc.dart';
@@ -55,10 +56,13 @@ setup() async {
   locator.registerSingleton<StatusUsecase>(StatusUsecase(locator()));
   locator.registerSingleton<ProductUseCase>(ProductUseCase(locator()));
   locator.registerSingleton<PaymentUsecase>(PaymentUsecase(locator()));
+  locator
+      .registerSingleton<MyketPaymentUsecase>(MyketPaymentUsecase(locator()));
 
   // locator.registerFactory<HomeBloc>(() => HomeBloc(locator(), locator()));
   locator.registerFactory<AuthBloc>(() => AuthBloc(locator(), locator()));
   // locator.registerFactory<CheckAuthBloc>(() => CheckAuthBloc());
   locator.registerFactory<StatusBloc>(() => StatusBloc(locator()));
-  locator.registerFactory<ProductBloc>(() => ProductBloc(locator(), locator()));
+  locator.registerFactory<ProductBloc>(
+      () => ProductBloc(locator(), locator(), locator()));
 }

@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:instastyle/core/usecase/use_case.dart';
+import 'package:instastyle/feature/product/domain/use_case/myket_payment_usecase.dart';
 
 import '../../../../core/resources/data_state.dart';
 import '../../domain/use_case/payment_usecase.dart';
@@ -11,7 +13,9 @@ import 'product_status.dart';
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final ProductUseCase productUseCase;
   final PaymentUsecase paymentUsecase;
-  ProductBloc(this.productUseCase , this.paymentUsecase)
+  final MyketPaymentUsecase myketPaymentUsecase;
+  ProductBloc(
+      this.productUseCase, this.paymentUsecase, this.myketPaymentUsecase)
       : super(ProductState(
             status: ProductInitial(), paymentStatus: ProductPaymentInit())) {
     on<ProdcutStartEvent>(
@@ -29,14 +33,17 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     );
     on<ProductPaymentEvent>(
       (event, emit) async {
-        emit(state.copyWith(paymentStatus: ProductPaymentLoading(event.productID)));
-        DataState dataState = await paymentUsecase.call(event.productID);
+        // emit(state.copyWith(paymentStatus: ProductPaymentLoading(event.productID)));
+        DataState dataState = await myketPaymentUsecase
+            .call(MyketPayment(event.productID, event.productUuid));
         print(dataState);
         if (dataState is DataSuccess) {
-          emit(state.copyWith(paymentStatus: ProductPaymentSuccess(dataState.data)));
+          emit(state.copyWith(
+              paymentStatus: ProductPaymentSuccess(dataState.data)));
         }
         if (dataState is DataError) {
-          emit(state.copyWith(paymentStatus: ProductPaymentError(dataState.error!)));
+          emit(state.copyWith(
+              paymentStatus: ProductPaymentError(dataState.error!)));
         }
       },
     );

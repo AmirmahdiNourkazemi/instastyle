@@ -4,5 +4,6 @@ class ProdcutStartEvent extends ProductEvent {}
 
 class ProductPaymentEvent extends ProductEvent {
   String productID;
-  ProductPaymentEvent(this.productID);
+  String productUuid;
+  ProductPaymentEvent(this.productID , this.productUuid);
 }

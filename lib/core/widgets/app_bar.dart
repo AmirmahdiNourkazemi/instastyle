@@ -62,7 +62,7 @@ PreferredSizeWidget appBar({
                           showLoginButtonSheet(
                               navigatorKey.currentState!.context);
                         } else if (LocalData.statusNotifier.value == null) {
-                          showProductBottomSheet(
+                          productModalButtonSheet(
                               navigatorKey.currentState!.context);
                         }
                       },
