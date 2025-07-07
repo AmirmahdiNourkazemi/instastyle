@@ -66,14 +66,14 @@ class ProductBottomSheet extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             width: MediaQuery.of(context).size.width,
-            height: 260,
             decoration: const BoxDecoration(
               // color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20)),
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.max,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
               // shrinkWrap: true,
               children: [
                 Text(
@@ -87,7 +87,11 @@ class ProductBottomSheet extends StatelessWidget {
                 if (state.status is ProductLoading) ...[
                   Center(child: loadingWidget(context))
                 ] else if (state.status is ProductSuccess) ...[
-                  ListView.builder(
+                  ListView.separated(
+                    separatorBuilder: (context, index) =>  Divider(
+                      height: 0.2,
+                      color: Theme.of(context).colorScheme.secondary.withOpacity(0.3),
+                    ),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
@@ -104,7 +108,7 @@ class ProductBottomSheet extends StatelessWidget {
                         },
                         child: SizedBox(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            padding: const EdgeInsets.symmetric(horizontal: 8 , vertical: 8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
