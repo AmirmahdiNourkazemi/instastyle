@@ -55,7 +55,7 @@ class _FontsListViewState extends State<FontsListView> {
                   if (LocalData.firstTokenNotifier.value.isEmpty) {
                     showLoginButtonSheet(context);
                   } else if (!value) {
-                    showProductBottomSheet(context);
+                    productModalButtonSheet(context);
                   }
                 }
                 setState(() {
