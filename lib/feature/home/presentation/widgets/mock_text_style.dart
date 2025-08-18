@@ -2,6 +2,7 @@ import 'text_style.dart';
 
 final List<TextStyleConfig> textStyleConfigs = [
   TextStyleConfig(name: 'آوینی', fontFamily: 'aviny2'),
+  TextStyleConfig(name: 'نستعلیق', fontFamily: 'NS'),
   TextStyleConfig(name: 'کولاک', fontFamily: 'colak'),
   TextStyleConfig(name: 'دیجیکالا', fontFamily: 'digikala'),
   TextStyleConfig(name: 'آهنگ', fontFamily: 'ahang'),
