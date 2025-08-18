@@ -164,7 +164,10 @@ flutter:
         - asset: assets/fonts/Peyda.ttf         
     - family: sf
       fonts:
-        - asset: assets/fonts/SF.ttf                                                              
+        - asset: assets/fonts/SF.ttf   
+    - family: NS
+      fonts:
+        - asset: assets/fonts/IranNastaliq.ttf                                                                 
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
