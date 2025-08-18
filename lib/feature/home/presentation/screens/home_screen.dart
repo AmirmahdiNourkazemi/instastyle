@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.pink,
-      appBar: appBar(title: 'texim', showUsage: true, actions: [
+      appBar: appBar(title: 'متن استوری', showUsage: true, actions: [
         ValueListenableBuilder(
           valueListenable: LocalData.isPaid,
           builder: (context, value, child) {
@@ -113,11 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         ),
-        // IconButton(
-        //     onPressed: () {
-        //       locator<LocalData>().saveApproToken('');
-        //     },
-        //     icon: Icon(Icons.add))
       ]),
       body: Container(
         color: Colors.transparent,
@@ -129,18 +124,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 key: _globalKey,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
-                  // child: childStyle(
-                  //   child: StyledTextInput(
-                  //       textStyle: selectedStyle.copyWith(
-                  //         fontSize: valueFontSize,
-                  //         color: selectColor,
-                  //       ),
-                  //       onTextChanged: (value) {
-                  //         setState(() {
-                  //           text = value;
-                  //         });
-                  //       }),
-                  // ),
                   child: dynamicTextStyle(
                     textStyle: selectedStyle.copyWith(
                       letterSpacing: 0.2,
@@ -172,20 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            // Positioned(
-            //   top: 10,
-            //   right: 10,
-            //   child: ElevatedButton.icon(
-            //     iconAlignment: IconAlignment.end,
-            //     onPressed: () {
-            //       FocusScope.of(context).unfocus();
-            //       Future.delayed(const Duration(milliseconds: 500));
-            //       export.captureAndCopy(_globalKey);
-            //     },
-            //     label: const Text('کپی فونت'),
-            //     icon: const Icon(Icons.copy),
-            //   ),
-            // ),
             VerticalFontSlider(
               initialSize: valueFontSize,
               onSizeChanged: (value) {

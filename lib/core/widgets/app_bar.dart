@@ -15,7 +15,10 @@ PreferredSizeWidget appBar({
 }) {
   return AppBar(
       leadingWidth: 130,
-      title: Text(title),
+      title: Text(
+        title,
+        style: Theme.of(navigatorKey.currentContext!).textTheme.bodyMedium,
+      ),
       centerTitle: centerTitle,
       actions: actions,
       leading: showUsage
