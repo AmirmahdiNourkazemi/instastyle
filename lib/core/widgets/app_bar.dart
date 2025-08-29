@@ -6,13 +6,13 @@ import 'package:instastyle/feature/auth/presentation/screen/login_screen.dart';
 import 'package:instastyle/feature/product/presentation/widget/product_buttom_sheet.dart';
 import 'package:instastyle/main.dart' show navigatorKey;
 
-PreferredSizeWidget appBar({
-  required String title,
-  List<Widget>? actions,
-  Widget? leading,
-  bool centerTitle = true,
-  bool showUsage = false,
-}) {
+PreferredSizeWidget appBar(
+    {required String title,
+    List<Widget>? actions,
+    Widget? leading,
+    bool centerTitle = true,
+    bool showUsage = false,
+    BuildContext? context}) {
   return AppBar(
       leadingWidth: 130,
       title: Text(
@@ -60,13 +60,11 @@ PreferredSizeWidget appBar({
                   }
                   return TextButton.icon(
                       onPressed: () {
-                        if (LocalData.firstTokenNotifier.value.isEmpty &&
-                            navigatorKey.currentState != null) {
-                          showLoginButtonSheet(
-                              navigatorKey.currentState!.context);
-                        } else if (LocalData.statusNotifier.value == null) {
-                          productModalButtonSheet(
-                              navigatorKey.currentState!.context);
+                        // productModalButtonSheet(context);
+                        if (LocalData.firstTokenNotifier.value.isEmpty) {
+                          showLoginButtonSheet(context);
+                        } else if (value?.products?.isEmpty ?? false) {
+                          productModalButtonSheet(context);
                         }
                       },
                       icon: const Icon(MingCute.store_line),

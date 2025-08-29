@@ -77,43 +77,50 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.pink,
-      appBar: appBar(title: 'متن استوری', showUsage: true, actions: [
-        ValueListenableBuilder(
-          valueListenable: LocalData.isPaid,
-          builder: (context, value, child) {
-            print(value);
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                // iconAlignment: IconAlignment.end,
-                style: ButtonStyle(
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+      appBar: appBar(
+          title: 'متن استوری',
+          context: context,
+          showUsage: true,
+          actions: [
+            ValueListenableBuilder(
+              valueListenable: LocalData.isPaid,
+              builder: (context, value, child) {
+                print(value);
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    // iconAlignment: IconAlignment.end,
+                    style: ButtonStyle(
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                      ),
+                      backgroundColor: WidgetStateProperty.all(
+                          !value && isProFont
+                              ? Colors.grey
+                              : Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.6)),
+                    ),
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      Future.delayed(const Duration(milliseconds: 500))
+                          .then((_) {
+                        export.captureAndCopy(_globalKey);
+                      });
+                    },
+                    child: Text(
+                      'کپی فونت',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                          color: Theme.of(context).colorScheme.onSurface),
                     ),
                   ),
-                  backgroundColor: WidgetStateProperty.all(!value && isProFont
-                      ? Colors.grey
-                      : Theme.of(context).colorScheme.primary.withOpacity(0.6)),
-                ),
-                onPressed: () {
-                  FocusScope.of(context).unfocus();
-                  Future.delayed(const Duration(milliseconds: 500)).then((_) {
-                    export.captureAndCopy(_globalKey);
-                  });
-                },
-                child: Text(
-                  'کپی فونت',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(color: Theme.of(context).colorScheme.onSurface),
-                ),
-              ),
-            );
-          },
-        ),
-      ]),
+                );
+              },
+            ),
+          ]),
       body: Container(
         color: Colors.transparent,
         child: Stack(
