@@ -2,11 +2,14 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:super_clipboard/super_clipboard.dart'; // Add this in pubspec.yaml
+import 'package:flutter_image_clipboard/flutter_image_clipboard.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 class Export {
   final BuildContext context;
   final String text;
+
   Export({required this.context, required this.text});
 
   Future<void> captureAndCopy(GlobalKey globalKey) async {
@@ -19,11 +22,11 @@ class Export {
           await image.toByteData(format: ui.ImageByteFormat.png);
       Uint8List pngBytes = byteData!.buffer.asUint8List();
 
-      // Copy image to clipboard using super_clipboard
-      final item = DataWriterItem();
-      item.add(Formats.png(pngBytes));
-      await ClipboardWriter.instance.write([item]);
-
+      final tempDir = await getTemporaryDirectory();
+      final file = File('${tempDir.path}/clipboard.png');
+      await file.writeAsBytes(pngBytes);
+      final flutterImageClipboard = FlutterImageClipboard();
+      await flutterImageClipboard.copyImageToClipboard(file);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("📋 Copied image to clipboard!")),
       );
