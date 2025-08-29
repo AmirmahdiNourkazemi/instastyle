@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                iconAlignment: IconAlignment.end,
+                // iconAlignment: IconAlignment.end,
                 style: ButtonStyle(
                   shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
