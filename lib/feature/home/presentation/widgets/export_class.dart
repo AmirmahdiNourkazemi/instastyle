@@ -3,8 +3,10 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_image_clipboard/flutter_image_clipboard.dart';
+import 'package:instastyle/core/widgets/show_toast.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:toastification/toastification.dart';
 
 class Export {
   final BuildContext context;
@@ -27,9 +29,11 @@ class Export {
       await file.writeAsBytes(pngBytes);
       final flutterImageClipboard = FlutterImageClipboard();
       await flutterImageClipboard.copyImageToClipboard(file);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("📋 Copied image to clipboard!")),
-      );
+      showToast(context, 'کپی شد', '', ToastificationType.success,
+          isIconMessage: true);
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(content: Text("📋 کپی شد")),
+      // );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("❌ Failed: $e")),
