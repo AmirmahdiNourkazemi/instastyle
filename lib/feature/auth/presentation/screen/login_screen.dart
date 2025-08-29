@@ -115,16 +115,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       )),
                   const SizedBox(height: Dimensions.marginSmall),
-                  TextButton.icon(
-                    onPressed: () {
-                      launchUrl(Uri.parse(
-                          'https://doc-hosting.flycricket.io/texim-privacy-policy/703ad776-8974-49d5-8709-44816f09a716/privacy'));
-                    },
-                    label: Text(
-                      'شرایط و قوانین',
-                      style: Theme.of(context).textTheme.bodySmall,
+                  Center(
+                    child: TextButton.icon(
+                      onPressed: () {
+                        launchUrl(Uri.parse(
+                            'https://doc-hosting.flycricket.io/texim-privacy-policy/703ad776-8974-49d5-8709-44816f09a716/privacy'));
+                      },
+                      label: Text(
+                        'شرایط و قوانین',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      icon: const Icon(MingCute.user_security_line),
                     ),
-                    icon: const Icon(MingCute.user_security_line),
                   )
                 ],
               ),
