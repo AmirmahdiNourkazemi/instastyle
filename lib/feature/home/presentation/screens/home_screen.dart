@@ -9,7 +9,7 @@ import 'package:instastyle/feature/home/presentation/widgets/text_filled_style.d
 import 'package:instastyle/feature/home/presentation/widgets/vertical_font_slider.dart';
 import 'package:instastyle/feature/status/data/model/status_model.dart';
 import 'package:instastyle/feature/status/presentation/bloc/status_event.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 import '../../../status/presentation/bloc/status_bloc.dart';
 import '../widgets/footer_buttons.dart';
 
@@ -42,25 +42,25 @@ class _HomeScreenState extends State<HomeScreen> {
   late Export export;
   final GlobalKey _globalKey = GlobalKey();
   bool colorFlag = false;
-  Future<void> storagePermission() async {
-    try {
-      if (await Permission.photos.request().isGranted ||
-          await Permission.mediaLibrary.request().isGranted ||
-          await Permission.videos.request().isGranted ||
-          await Permission.audio.request().isGranted) {
-        // print('Permission granted');
-      } else {
-        // print('Permission denied');
-      }
-    } catch (e) {
-      // print('Permission request failed: $e');
-    }
-  }
+  // Future<void> storagePermission() async {
+  //   try {
+  //     if (await Permission.photos.request().isGranted ||
+  //         await Permission.mediaLibrary.request().isGranted ||
+  //         await Permission.videos.request().isGranted ||
+  //         await Permission.audio.request().isGranted) {
+  //       // print('Permission granted');
+  //     } else {
+  //       // print('Permission denied');
+  //     }
+  //   } catch (e) {
+  //     // print('Permission request failed: $e');
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
-    storagePermission();
+    // storagePermission();
     export = Export(context: context, text: text);
     BlocProvider.of<StatusBloc>(context)
         .add(StatusInitialEvent()); // TODO: implement initState>
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                iconAlignment: IconAlignment.end,
+                // iconAlignment: IconAlignment.end,
                 style: ButtonStyle(
                   shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
